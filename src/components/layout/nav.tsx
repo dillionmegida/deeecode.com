@@ -62,7 +62,7 @@ const Block = styled.nav<{ pageType: string }>`
 `
 
 export default function Nav({ location }) {
-  const pageType = location.pathname.startsWith("/courses/regex")
+  const pageType = location?.pathname?.startsWith("/courses/regex")
     ? "regex"
     : "regular"
 
