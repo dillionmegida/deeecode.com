@@ -17,6 +17,14 @@ module.exports = {
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-mdx`,
+    {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          name: `pages`,
+          path: `${__dirname}/src/pages`,
+        },
+      },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -24,6 +32,13 @@ module.exports = {
         name: `blog`,
       },
     },
+    {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          path: `${__dirname}/content/courses`,
+          name: `courses`,
+        },
+      },
     // {
     //   resolve: `gatsby-source-filesystem`,
     //   options: {

@@ -4,13 +4,21 @@ import { useStaticQuery, graphql } from "gatsby"
 const DOMAIN = "https://deeecode.com"
 const DEFAULT_IMAGE = "/banner.png"
 
+type Props = {
+  title: string
+  description: string
+  children?: React.ReactNode
+  imageCard: string
+  defaultTitleOnly?: boolean
+}
+
 const Seo = ({
   description,
   title,
   children,
   imageCard: _imageCard,
   defaultTileOnly,
-}) => {
+}: Props) => {
   const { site } = useStaticQuery(
     graphql`
       query {

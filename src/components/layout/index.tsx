@@ -28,7 +28,7 @@ const Container = styled.div`
 type Props = {
   location: Location
   children: React.ReactNode
-  theme: Theme
+  theme?: Theme
 }
 
 const Layout = ({

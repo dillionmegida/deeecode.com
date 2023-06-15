@@ -1,14 +1,19 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import styled from "styled-components"
 
-const COURSE_COVER = "/courses/regex-course-cover.png"
+const COURSE_COVER = "/courses/regex/regex-course-cover.png"
 
 const Container = styled.div`
+  font-size: 20px;
   color: white;
+
+  a {
+    color: var(--color-regex-course);
+  }
 `
 
 const Cover = styled.div`
@@ -21,15 +26,23 @@ const Cover = styled.div`
 `
 
 const Bio = styled.div`
-  font-size: 20px;
   margin-bottom: var(--spacing-16);
+`
 
-  a {
-    color: var(--color-regex-course);
+const Outline = styled.div`
+  ol {
+    padding-left: 20px;
+  }
+
+  li {
+    list-style-type: decimal;
+    padding-left: 5px;
   }
 `
 
-const RegexCoursePage = ({ location }) => {
+const RegexCoursePage = ({ location, data }) => {
+  const courses = data.allMdx.nodes
+
   return (
     <Layout location={location} theme={{ bg: "--color-dark-regex" }}>
       <Container>
@@ -47,6 +60,23 @@ const RegexCoursePage = ({ location }) => {
             and the written part will be published on this website.
           </p>
         </Bio>
+        <Outline>
+          <h2>Outline</h2>
+          <ol>
+            {courses.map(course => {
+              const {
+                frontmatter: { title },
+                fields: { slug },
+              } = course
+
+              return (
+                <li>
+                  <Link to={slug}>{title}</Link>
+                </li>
+              )
+            })}
+          </ol>
+        </Outline>
       </Container>
     </Layout>
   )
@@ -55,5 +85,25 @@ const RegexCoursePage = ({ location }) => {
 export default RegexCoursePage
 
 export const Head = () => (
-  <Seo imageCard={COURSE_COVER} title="Simplified Regular Expressions Course" />
+  <Seo
+    description="Learn regular expressions in this simplified course"
+    imageCard={COURSE_COVER}
+    title="Simplified Regular Expressions Course"
+  />
 )
+
+export const pageQuery = graphql`
+  {
+    allMdx {
+      nodes {
+        frontmatter {
+          title
+          date(formatString: "MMMM DD, YYYY")
+        }
+        fields {
+          slug
+        }
+      }
+    }
+  }
+`
