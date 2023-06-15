@@ -1,10 +1,13 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { Link } from "gatsby"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import styled from "styled-components"
+
+const Container = styled.div`
+  color: white;
+`
 
 const Cover = styled.div`
   width: 100%;
@@ -14,93 +17,46 @@ const Cover = styled.div`
   }
 `
 
-const IndexPage = ({ data }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+const Bio = styled.div`
+  font-size: 20px;
+  margin-bottom: var(--spacing-16);
 
-  if (posts.length === 0) {
-    return (
-      <Layout title={siteTitle}>
+  a {
+    color: var(--color-primary-light);
+  }
+`
+
+const IndexPage = () => {
+  return (
+    <Layout title="Deeecode The Web">
+      <Container>
         <Cover className="cover">
           <img src="/banner.png" alt="Deeecode cover" />
         </Cover>
-        <Bio />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    )
-  }
-
-  return (
-    <Layout title={siteTitle}>
-      <Cover className="cover">
-        <img src="/banner.png" alt="Deeecode cover" />
-      </Cover>
-      <Bio />
-      <ol style={{ listStyle: `none` }}>
-        {/* {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
-
-          return (
-            <li className="post-list-item" key={post.fields.slug}>
-              <article itemScope itemType="http://schema.org/Article">
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  <small className="date">{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
-            </li>
-          )
-        })} */}
-      </ol>
-      <footer>© {new Date().getFullYear()}</footer>
+        <Bio>
+          <p>
+            Simplifying the web, one video at a time. Check out my{" "}
+            <a href="https://youtube.com/@deeecode">
+              YouTube channel @deeecode
+            </a>{" "}
+            for videos I've made on JavaScript, React, CSS, and other languages.
+          </p>
+          <p>
+            Check out my{" "}
+            <Link to="/courses/regex">
+              Simplified Regular Expressions Course
+            </Link>
+          </p>
+          <p>
+            Owned, by Dillion. Check me out on{" "}
+            <a href={`https://twitter.com/iamdillion`}>Twitter @iamdillion</a>
+          </p>
+        </Bio>
+      </Container>
     </Layout>
   )
 }
 
 export default IndexPage
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
 export const Head = () => <Seo title="Simplify The Web" />
-
-export const pageQuery = graphql`
-  {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
-      nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          description
-        }
-      }
-    }
-  }
-`

@@ -8,8 +8,8 @@ module.exports = {
       name: `Dillion Megida`,
       summary: `who lives in the Netherlands and is exploring and learning more about life each day.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `Videos and articles simplifying the web from JavaScript to CSS, to HTML, to React and so much more`,
+    siteUrl: `https://deeecode.com/`,
     social: {
       twitter: `iamdillion`,
     },
@@ -60,7 +60,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#ffffff`,
         display: `minimal-ui`,
-        icon: `static/banner.png`,
+        icon: `static/logo.png`,
       },
     },
     {

@@ -18,6 +18,7 @@ const Layout = ({ title, children }) => {
         </Link>
       </header>
       <main>{children}</main>
+      <footer>© {new Date().getFullYear()}</footer>
     </Container>
   )
 }
