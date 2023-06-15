@@ -5,6 +5,8 @@ import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import styled from "styled-components"
 
+const COURSE_COVER = "/courses/regex-course-cover.png"
+
 const Container = styled.div`
   color: white;
 `
@@ -12,7 +14,6 @@ const Container = styled.div`
 const Cover = styled.div`
   width: 100%;
   margin-bottom: var(--spacing-10);
-  border: 1px solid #8f8f8f;
 
   img {
     width: 100%;
@@ -28,13 +29,14 @@ const Bio = styled.div`
   }
 `
 
-const IndexPage = () => {
+const RegexCoursePage = ({ location }) => {
   return (
-    <Layout title="Regular Expressions Simplified Course">
+    <Layout location={location} theme={{ bg: "--color-dark-regex" }}>
       <Container>
         <Cover className="cover">
-          <img src="/courses/regex-course-cover.png" alt="Deeecode cover" />
+          <img src={COURSE_COVER} alt="Regular Expressions Course cover" />
         </Cover>
+        <h1>Regular Expressions Simplified Course</h1>
         <Bio>
           <p>
             Watch out for my Simplified Regular Expression Course. It would be
@@ -50,6 +52,8 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default RegexCoursePage
 
-export const Head = () => <Seo title="Simplified Regular Expressions Course" />
+export const Head = () => (
+  <Seo imageCard={COURSE_COVER} title="Simplified Regular Expressions Course" />
+)

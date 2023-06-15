@@ -6,7 +6,7 @@ import Seo from "../components/seo"
 import styled from "styled-components"
 
 const Container = styled.div`
-  color: white;
+ 
 `
 
 const Cover = styled.div`
@@ -26,13 +26,14 @@ const Bio = styled.div`
   }
 `
 
-const IndexPage = () => {
+const IndexPage = ({ location }) => {
   return (
-    <Layout title="Deeecode The Web">
+    <Layout location={location}>
       <Container>
         <Cover className="cover">
           <img src="/banner.png" alt="Deeecode cover" />
         </Cover>
+        <h1>Simplify the Web</h1>
         <Bio>
           <p>
             Simplifying the web, one video at a time. Check out my{" "}

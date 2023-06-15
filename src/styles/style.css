@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600;800&display=swap");
 
 :root {
   --maxWidth-none: "none";
@@ -62,9 +62,15 @@
   --color-heading-black: black;
   --color-accent: #d1dce5;
 
-  --color-regex-course: #A7FF72;
-
-  background-color: #0c1116;
+  
+  --color-dark-regular: #0c1116;
+  --color-dark-regular-bright: #171f28;
+  --color-dark-regular-bright-2: #2f3d4e;
+  
+  --color-regex-course: #a7ff72;
+  --color-dark-regex: #000c0c;
+  --color-dark-regex-bright: #001212;
+  --color-dark-regex-bright-2: #002323;
 }
 
 /* HTML elements */
@@ -245,14 +251,6 @@ a {
 a:hover,
 a:focus {
   text-decoration: none;
-}
-
-/* Custom classes */
-
-.global-wrapper {
-  margin: var(--spacing-0) auto;
-  max-width: var(--maxWidth-wrapper);
-  padding: var(--spacing-5) var(--spacing-5);
 }
 
 .main-heading {
