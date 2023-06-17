@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "styled-components"
 import Nav from "./nav"
+import NewTabLink from "../new-tab-link"
 
 type Theme = {
   bg: string
@@ -11,6 +12,7 @@ const Wrapper = styled.div<{ theme: Theme }>`
   margin: var(--spacing-0) auto;
   width: 100%;
   min-height: 100vh;
+  padding-bottom: 50px;
   color: white;
 
   @media (min-width: 800px) {
@@ -20,6 +22,17 @@ const Wrapper = styled.div<{ theme: Theme }>`
   .container,
   footer {
     padding: var(--spacing-5) var(--spacing-5);
+  }
+
+  footer {
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .global-header {
@@ -54,7 +67,11 @@ const Layout = ({
         </Link> */}
         </header>
         <main className="main">{children}</main>
-        <footer>© {new Date().getFullYear()}</footer>
+        <footer>
+          Managed by{" "}
+          <NewTabLink href="https://twitter.com/iamdillion">Dillion</NewTabLink>{" "}
+          &nbsp;&nbsp;|&nbsp;&nbsp; © {new Date().getFullYear()}
+        </footer>
       </Container>
     </Wrapper>
   )

@@ -1,5 +1,6 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const { LINKS } = require("./src/constants")
 
 // Define the template for blog post
 const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
@@ -24,11 +25,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
 
-      allMdx(sort: { frontmatter: { date: ASC } }) {
+      allMdx(sort: { fields: { orderId: ASC } }) {
         nodes {
           id
           fields {
             slug
+            orderId
           }
           internal {
             contentFilePath
@@ -110,12 +112,22 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === "Mdx") {
     const value = createFilePath({ node, getNode })
 
-    const postPath = `/courses${value}`
+    const filepathRegex = /^\/(\w+)\/(\d+)-([\w-]+)/
+
+    const [, courseLabel, courseOrder, coursePath] = value.match(filepathRegex)
+
+    const courseRelativePath = LINKS.courses[courseLabel][coursePath]
 
     createNodeField({
       name: `slug`,
       node,
-      value: postPath,
+      value: courseRelativePath,
+    })
+
+    createNodeField({
+      name: "orderId",
+      node,
+      value: courseOrder,
     })
   }
 }

@@ -6,13 +6,44 @@ import Seo from "../components/seo"
 import { MDXProvider } from "@mdx-js/react"
 import CodeBlock from "./code-block"
 import YouTube from "react-youtube"
+import { LINKS } from "../constants"
 
 const Container = styled.div`
   font-size: 20px;
   padding-bottom: 50px;
 
+  .part-block {
+    text-transform: uppercase;
+    background-color: var(--color-regex-course);
+    color: var(--color-dark-regex);
+    padding: 5px;
+    font-size: 14px;
+    font-family: var(--font-heading);
+  }
+
+  a {
+    color: var(--color-regex-course);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: 20px;
+    li {
+      margin-bottom: 10px;
+    }
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
   h1 {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   h2 {
@@ -29,22 +60,13 @@ const Container = styled.div`
   }
 
   .course-nav {
-    margin: 0 var(--spacing-5);
+    margin: 20px var(--spacing-5);
     font-size: 18px;
     display: flex;
     justify-content: space-between;
 
     &--just-next {
       justify-content: flex-end;
-    }
-
-    a {
-      color: var(--color-regex-course);
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
 
     &--prev,
@@ -73,8 +95,15 @@ const Cover = styled.div`
   }
 `
 
+function CourseLink({ course, path, label }) {
+  const link = LINKS.courses[course][path]
+
+  return <Link to={link}>{label}</Link>
+}
+
 const components = {
   code: CodeBlock,
+  CourseLink,
 }
 
 function CourseNav({ prevCourse, nextCourse }) {
@@ -101,19 +130,21 @@ function CourseNav({ prevCourse, nextCourse }) {
 export default function CoursePageTemplate({ location, data, children }) {
   const {
     frontmatter: { title, date, cover, youtubeId },
+    fields: { orderId },
   } = data.currentCourse
 
   const { prevCourse, nextCourse } = data
 
   return (
-    <Layout location={location}>
+    <Layout location={location} theme={{ bg: "--color-dark-regex" }}>
       <Container>
-        <Cover className="page-cover">
+        {/* <Cover className="page-cover">
           <img src={`/courses/regex/${cover}`} alt={`${title} cover`} />
-        </Cover>
+        </Cover> */}
         <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} />
         <div className="container">
-          <h1>{title}</h1>
+          <span className="part-block">Part {orderId}</span>
+          <h1> {title}</h1>
           <YouTube className="youtube-iframe" videoId={youtubeId} />
           <MDXProvider components={components}>{children}</MDXProvider>
         </div>
@@ -143,6 +174,7 @@ export const pageQuery = graphql`
       }
       fields {
         slug
+        orderId
       }
     }
     nextCourse: mdx(id: { eq: $nextCourseId }) {
