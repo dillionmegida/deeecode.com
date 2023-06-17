@@ -52,12 +52,16 @@ const RegexCoursePage = ({ location, data }) => {
         <h1>Regular Expressions Simplified Course</h1>
         <Bio>
           <p>
-            Watch out for my Simplified Regular Expression Course. It would be
-            published on my{" "}
-            <a href="https://youtube.com/@deeecode">
+            Here's my free course on Simplified Regular Expressions. In this
+            course, I teach you how to interpret and understand regular
+            expressions, so you can create patterns for your different needs.
+            <br/>
+            <br/>
+            The video version is live on my{" "}
+            <a href="https://www.youtube.com/playlist?list=PLLdz3KlabJv1UVT8cZ-h4iI7fRqC_rArb">
               YouTube channel @deeecode
             </a>{" "}
-            and the written part will be published on this website.
+            and you can find the written parts below.
           </p>
         </Bio>
         <Outline>
@@ -94,7 +98,7 @@ export const Head = () => (
 
 export const pageQuery = graphql`
   {
-    allMdx {
+    allMdx(sort: { frontmatter: { date: ASC } }) {
       nodes {
         frontmatter {
           title

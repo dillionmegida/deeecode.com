@@ -10,9 +10,17 @@ const Wrapper = styled.div<{ theme: Theme }>`
   background-color: var(${({ theme }) => theme.bg});
   margin: var(--spacing-0) auto;
   width: 100%;
-  padding: var(--spacing-5) var(--spacing-5);
   min-height: 100vh;
   color: white;
+
+  @media (min-width: 800px) {
+    padding-top: var(--spacing-10);
+  }
+
+  .container,
+  footer {
+    padding: var(--spacing-5) var(--spacing-5);
+  }
 
   .global-header {
     text-transform: uppercase;
@@ -45,7 +53,7 @@ const Layout = ({
           <h1>{title}</h1>
         </Link> */}
         </header>
-        <main>{children}</main>
+        <main className="main">{children}</main>
         <footer>© {new Date().getFullYear()}</footer>
       </Container>
     </Wrapper>

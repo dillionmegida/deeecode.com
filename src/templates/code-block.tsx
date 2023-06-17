@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 const Container = styled.div`
   margin-bottom: 10px;
+  
   .block {
     padding: 20px 20px 5px;
     border-radius: 5px;

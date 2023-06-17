@@ -5,9 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import styled from "styled-components"
 
-const Container = styled.div`
- 
-`
+const Container = styled.div``
 
 const Cover = styled.div`
   width: 100%;
@@ -30,29 +28,32 @@ const IndexPage = ({ location }) => {
   return (
     <Layout location={location}>
       <Container>
-        <Cover className="cover">
+        <Cover className="page-cover">
           <img src="/banner.png" alt="Deeecode cover" />
         </Cover>
-        <h1>Simplify the Web</h1>
-        <Bio>
-          <p>
-            Simplifying the web, one video at a time. Check out my{" "}
-            <a href="https://youtube.com/@deeecode">
-              YouTube channel @deeecode
-            </a>{" "}
-            for videos I've made on JavaScript, React, CSS, and other languages.
-          </p>
-          <p>
-            Check out my{" "}
-            <Link to="/courses/regex">
-              Simplified Regular Expressions Course
-            </Link>
-          </p>
-          <p>
-            Owned, by Dillion. Check me out on{" "}
-            <a href={`https://twitter.com/iamdillion`}>Twitter @iamdillion</a>
-          </p>
-        </Bio>
+        <div className="container">
+          <h1>Simplify the Web</h1>
+          <Bio>
+            <p>
+              Simplifying the web, one video at a time. Check out my{" "}
+              <a href="https://youtube.com/@deeecode">
+                YouTube channel @deeecode
+              </a>{" "}
+              for videos I've made on JavaScript, React, CSS, and other
+              languages.
+            </p>
+            <p>
+              Check out my{" "}
+              <Link to="/courses/regex">
+                Simplified Regular Expressions Course
+              </Link>
+            </p>
+            <p>
+              Owned, by Dillion. Check me out on{" "}
+              <a href={`https://twitter.com/iamdillion`}>Twitter @iamdillion</a>
+            </p>
+          </Bio>
+        </div>
       </Container>
     </Layout>
   )

@@ -24,7 +24,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
 
-      allMdx {
+      allMdx(sort: { frontmatter: { date: ASC } }) {
         nodes {
           id
           fields {

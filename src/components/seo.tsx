@@ -6,10 +6,9 @@ const DEFAULT_IMAGE = "/banner.png"
 
 type Props = {
   title: string
-  description: string
+  description?: string
   children?: React.ReactNode
-  imageCard: string
-  defaultTitleOnly?: boolean
+  imageCard?: string
 }
 
 const Seo = ({
@@ -17,7 +16,6 @@ const Seo = ({
   title,
   children,
   imageCard: _imageCard,
-  defaultTileOnly,
 }: Props) => {
   const { site } = useStaticQuery(
     graphql`
@@ -38,11 +36,7 @@ const Seo = ({
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
 
-  const titleToShow = defaultTitle
-    ? defaultTileOnly
-      ? defaultTitle
-      : `${title} | ${defaultTitle}`
-    : title
+  const titleToShow = `${title} | ${defaultTitle}`
 
   const imageCard = _imageCard
     ? _imageCard.startsWith("http")
