@@ -19,7 +19,7 @@ const LINKS = [
 ]
 
 const Block = styled.nav<{ pageType: string }>`
-  background-color: var(--color-dark-${({ pageType }) => pageType}-bright);
+  background-color: var(--color-${({ pageType }) => pageType}-dark-2);
 
   ul,
   li {
@@ -49,9 +49,7 @@ const Block = styled.nav<{ pageType: string }>`
 
     &.active-link,
     &:hover {
-      background-color: var(
-        --color-dark-${({ pageType }) => pageType}-bright-2
-      );
+      background-color: var(--color-${({ pageType }) => pageType}-dark-3);
       transition: background-color 300ms;
 
       &:not(:hover) {
@@ -64,6 +62,8 @@ const Block = styled.nav<{ pageType: string }>`
 export default function Nav({ location }) {
   const pageType = location?.pathname?.startsWith("/courses/regex")
     ? "regex"
+    : location?.pathname?.startsWith("/courses/javascript")
+    ? "javascript"
     : "regular"
 
   return (

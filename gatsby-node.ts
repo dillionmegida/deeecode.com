@@ -5,7 +5,7 @@ const { LINKS } = require("./src/constants")
 // Define the template for blog post
 const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
 
-const coursePageTemplate = path.resolve("./src/templates/course-page.tsx")
+const coursePageTemplate = path.resolve("./src/templates/course-page/index.tsx")
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -116,7 +116,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
     const [, courseLabel, courseOrder, coursePath] = value.match(filepathRegex)
 
-    const courseRelativePath = LINKS.courses[courseLabel][coursePath]
+    const courseRelativePath = LINKS.courses[courseLabel].sub[coursePath]
 
     createNodeField({
       name: `slug`,

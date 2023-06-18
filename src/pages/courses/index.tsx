@@ -3,6 +3,7 @@ import Layout from "../../components/layout"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import Seo from "../../components/seo"
+import { LINKS } from "../../constants"
 
 const Container = styled.div`
   font-size: 20px;
@@ -11,7 +12,11 @@ const Container = styled.div`
 const COURSES = [
   {
     label: "Regular Expressions Simplified",
-    path: "/courses/regex",
+    path: LINKS.courses.regex.path
+  },
+  {
+    label: "JavaScript Simplified for Beginners",
+    path: LINKS.courses.javascript.path
   },
 ]
 

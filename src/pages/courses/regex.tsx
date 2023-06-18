@@ -16,7 +16,7 @@ const Container = styled.div`
   }
 
   a {
-    color: var(--color-regex-course);
+    color: var(--color-regex);
   }
 `
 
@@ -48,7 +48,7 @@ const RegexCoursePage = ({ location, data }) => {
   const courses = data.allMdx.nodes
 
   return (
-    <Layout location={location} theme={{ bg: "--color-dark-regex" }}>
+    <Layout location={location} theme='regex'>
       <Container>
         <Cover className="cover">
           <img src={COURSE_COVER} alt="Regular Expressions Course cover" />
@@ -104,11 +104,13 @@ export const Head = () => (
 
 export const pageQuery = graphql`
   {
-    allMdx(sort: { frontmatter: { date: ASC } }) {
+    allMdx(
+      sort: { fields: { orderId: ASC } }
+      filter: { fields: { slug: { regex: "/\/courses/regex\/" } } }
+    ) {
       nodes {
         frontmatter {
           title
-          date(formatString: "MMMM DD, YYYY")
         }
         fields {
           slug

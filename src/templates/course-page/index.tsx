@@ -1,12 +1,13 @@
 import * as React from "react"
-import Layout from "../components/layout"
+import Layout from "../../components/layout"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
-import Seo from "../components/seo"
+import Seo from "../../components/seo"
 import { MDXProvider } from "@mdx-js/react"
-import CodeBlock from "./code-block"
+import CodeBlock from "../../components/mdx/CodeBlock"
 import YouTube from "react-youtube"
-import { LINKS } from "../constants"
+import CourseNav from "./course-nav"
+import CourseLink from "./course-link"
 
 const Container = styled.div`
   font-size: 20px;
@@ -14,15 +15,15 @@ const Container = styled.div`
 
   .part-block {
     text-transform: uppercase;
-    background-color: var(--color-regex-course);
-    color: var(--color-dark-regex);
+    background-color: var(--color-regex);
+    color: var(--color-regex-dark);
     padding: 5px;
     font-size: 14px;
     font-family: var(--font-heading);
   }
 
   a {
-    color: var(--color-regex-course);
+    color: var(--color-regex);
     text-decoration: none;
 
     &:hover {
@@ -47,7 +48,7 @@ const Container = styled.div`
   }
 
   h2 {
-    color: var(--color-regex-course);
+    color: var(--color-regex);
   }
 
   .youtube-iframe {
@@ -86,57 +87,30 @@ const Container = styled.div`
   }
 `
 
-const Cover = styled.div`
-  width: 100%;
-  margin-bottom: var(--spacing-10);
+// const Cover = styled.div`
+//   width: 100%;
+//   margin-bottom: var(--spacing-10);
 
-  img {
-    width: 100%;
-  }
-`
-
-function CourseLink({ course, path, label }) {
-  const link = LINKS.courses[course][path]
-
-  return <Link to={link}>{label}</Link>
-}
+//   img {
+//     width: 100%;
+//   }
+// `
 
 const components = {
   code: CodeBlock,
   CourseLink,
 }
 
-function CourseNav({ prevCourse, nextCourse }) {
-  return (
-    <div className={`course-nav ${prevCourse ? "" : "course-nav--just-next"}`}>
-      {prevCourse && (
-        <div className="course-nav--prev">
-          <Link to={prevCourse.fields.slug}>
-            &lt; {prevCourse.frontmatter.title}
-          </Link>
-        </div>
-      )}
-      {nextCourse && (
-        <div className="course-nav--next">
-          <Link to={nextCourse.fields.slug}>
-            {nextCourse.frontmatter.title} &gt;
-          </Link>
-        </div>
-      )}
-    </div>
-  )
-}
-
 export default function CoursePageTemplate({ location, data, children }) {
   const {
-    frontmatter: { title, date, cover, youtubeId },
+    frontmatter: { title, youtubeId },
     fields: { orderId },
   } = data.currentCourse
 
   const { prevCourse, nextCourse } = data
 
   return (
-    <Layout location={location} theme={{ bg: "--color-dark-regex" }}>
+    <Layout location={location} theme={{ bg: "--color-regex-dark" }}>
       <Container>
         {/* <Cover className="page-cover">
           <img src={`/courses/regex/${cover}`} alt={`${title} cover`} />

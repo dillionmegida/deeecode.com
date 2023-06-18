@@ -26,7 +26,7 @@ const Wrapper = styled.div<{ theme: Theme }>`
 
   footer {
     a {
-      color: var(--color-primary);
+      color: var(${({ theme }) => theme.link});
       text-decoration: none;
 
       &:hover {
@@ -49,16 +49,17 @@ const Container = styled.div`
 type Props = {
   location: Location
   children: React.ReactNode
-  theme?: Theme
+  theme?: "regular" | "regex" | "javascript"
 }
 
-const Layout = ({
-  location,
-  children,
-  theme = { bg: "--color-dark-regular" },
-}: Props) => {
+const Layout = ({ location, children, theme = "regular" }: Props) => {
+  const themeObj = {
+    bg: `--color-${theme}-dark`,
+    link: `--color-${theme}`,
+  }
+
   return (
-    <Wrapper className="global-wrapper" theme={theme}>
+    <Wrapper className="global-wrapper" theme={themeObj}>
       <Container>
         <header className="global-header">
           <Nav location={location} />
