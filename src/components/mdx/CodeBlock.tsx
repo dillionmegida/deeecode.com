@@ -2,26 +2,32 @@ import React from "react"
 import { Highlight, themes } from "prism-react-renderer"
 import styled from "styled-components"
 
-const Container = styled.div`
-  margin-bottom: 10px;
-  
-  .block {
-    padding: 20px 20px 5px;
-    border-radius: 5px;
+const Inline = styled.span`
+  padding: 4px;
+  background-color: var(--color-regex-dark-3);
+  border-radius: 5px;
+`
 
-    span {
-      display: inline-block;
-      margin-bottom: 5px;
-    }
+const Multiline = styled.div`
+  margin-bottom: 20px;
+
+  .block {
+    padding: 25px 40px 0 20px;
+    border-radius: 5px;
+    width: 100%;
+    overflow-x: auto;
   }
 `
 
 export default function CodeBlock({ children, className }) {
-    console.log(className)
   const language = className?.replace(/language-/, "") || ""
 
+  const inline = !className
+
+  if (inline) return <Inline>{children}</Inline>
+
   return (
-    <Container>
+    <Multiline>
       <Highlight theme={themes.dracula} code={children} language={language}>
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <pre className="block" style={{ ...style }}>
@@ -38,6 +44,6 @@ export default function CodeBlock({ children, className }) {
           </pre>
         )}
       </Highlight>
-    </Container>
+    </Multiline>
   )
 }

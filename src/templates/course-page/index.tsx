@@ -104,13 +104,17 @@ const components = {
 export default function CoursePageTemplate({ location, data, children }) {
   const {
     frontmatter: { title, youtubeId },
-    fields: { orderId },
+    fields: { orderId, slug },
   } = data.currentCourse
 
   const { prevCourse, nextCourse } = data
 
+  const courseTypeRegex = /(?<=\/courses\/)\w+/
+
+  const [courseType] = slug.match(courseTypeRegex)
+
   return (
-    <Layout location={location} theme={{ bg: "--color-regex-dark" }}>
+    <Layout location={location} theme={courseType}>
       <Container>
         {/* <Cover className="page-cover">
           <img src={`/courses/regex/${cover}`} alt={`${title} cover`} />
