@@ -81,7 +81,7 @@ export default function BlogArticleTemplate({ location, data, children }) {
 export const Head = ({ data }) => (
   <Seo
     description={data.currentArticle.frontmatter.description}
-    imageCard={`/articles/${data.currentArticle.cover}`}
+    imageCard={`/articles/${data.currentArticle.frontmatter.cover}`}
     title={data.currentArticle.frontmatter.title}
   />
 )

@@ -134,7 +134,7 @@ export default function CoursePageTemplate({ location, data, children }) {
 export const Head = ({ data }) => (
   <Seo
     description={data.currentCourse.frontmatter.description}
-    imageCard={`/courses/regex/${data.currentCourse.cover}`}
+    imageCard={`/courses/regex/${data.currentCourse.frontmatter.cover}`}
     title={data.currentCourse.frontmatter.title}
   />
 )
