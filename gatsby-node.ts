@@ -39,7 +39,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       createNodeField({
         name: `slug`,
         node,
-        value: `/articles${articlePath}`,
+        value: `/p${articlePath.toLowerCase()}`,
       })
     }
   }
@@ -57,7 +57,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       allArticles: allMdx(
         sort: { frontmatter: { date: ASC } }
         limit: 1000
-        filter: { fields: { slug: { regex: "//articles//" } } }
+        filter: { fields: { slug: { regex: "//p//" } } }
       ) {
         nodes {
           id

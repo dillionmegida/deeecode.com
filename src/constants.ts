@@ -1,5 +1,6 @@
 export const LINKS = {
   courses: {
+    path: "/courses",
     regex: {
       path: "/courses/regex",
       sub: {
@@ -15,5 +16,8 @@ export const LINKS = {
       path: "/courses/javascript",
     },
   },
-  youtube: 'https://youtube.com/@deeecode'
+
+  articles: "/p",
+
+  youtube: "https://youtube.com/@deeecode",
 }

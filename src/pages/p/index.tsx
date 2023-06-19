@@ -5,7 +5,7 @@ import styled from "styled-components"
 import Seo from "../../components/seo"
 import { LINKS } from "../../constants"
 
-const Container = styled.div`
+const Container = styled.div<{ theme: any }>`
   font-size: 20px;
 
   .articles {
@@ -21,17 +21,28 @@ const Container = styled.div`
   }
 
   .article {
+    --main-color: var(--color-regular-light);
+
+    &--javascript {
+      --main-color: var(--color-javascript);
+    }
+
+    &--css {
+      --main-color: var(--color-css);
+    }
+
     &:hover {
       text-decoration: none;
 
       .article-cover {
-        border-color: var(--color-regular-light);
+        border-color: var(--main-color);
       }
 
       h2 {
-        color: var(--color-regular-light);
+        color: var(--main-color);
       }
     }
+
     &-cover {
       width: 100%;
       border-radius: 10px;
@@ -61,17 +72,21 @@ export default function Articles({ location, data }) {
         <h1>Articles</h1>
 
         <div className="articles">
-          {allArticles.nodes.map(({ frontmatter, fields }) => (
-            <Link to={fields.slug} className="article">
-              <div className="article-cover">
-                <img
-                  src={`/articles/${frontmatter.cover}`}
-                  alt={frontmatter.title}
-                />
-              </div>
-              <h2>{frontmatter.title}</h2>
-            </Link>
-          ))}
+          {allArticles.nodes.map(({ frontmatter, fields }) => {
+            const { category } = frontmatter
+
+            return (
+              <Link to={fields.slug} className={`article article--${category}`}>
+                <div className="article-cover">
+                  <img
+                    src={`/articles/${frontmatter.cover}`}
+                    alt={frontmatter.title}
+                  />
+                </div>
+                <h2>{frontmatter.title}</h2>
+              </Link>
+            )
+          })}
         </div>
       </Container>
     </Layout>
@@ -85,7 +100,7 @@ export const pageQuery = graphql`
     allArticles: allMdx(
       sort: { frontmatter: { date: ASC } }
       limit: 1000
-      filter: { fields: { slug: { regex: "//articles//" } } }
+      filter: { fields: { slug: { regex: "//p//" } } }
     ) {
       nodes {
         id
@@ -94,6 +109,7 @@ export const pageQuery = graphql`
           date
           description
           cover
+          category
         }
         fields {
           slug

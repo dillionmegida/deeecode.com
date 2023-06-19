@@ -78,6 +78,8 @@
   --color-javascript-dark: #0c0a01;
   --color-javascript-dark-2: #1a1703;
   --color-javascript-dark-3: #3c3506;
+
+  --color-css: var(--color-regular);
 }
 
 /* HTML elements */

@@ -1,0 +1,222 @@
+---
+title: innerText vs textContent - The Differences
+date: "2023-06-19"
+description: "What is the difference between these HTML Element properties?"
+cover: 2-textcontent-vs-innertext.png
+category: javascript
+---
+
+`textContent` and `innerText` are two methods of DOM Elements for getting the text characters of those elements. Though they look similar, they have differences and depending on what your needs are, one may be better than the other.
+
+For a while using JavaScript for DOM manipulation, I'd either use `innerHTML` (if I wanted the HTML string) or `innerText` (if I wanted the text string), but after a while, I found `innerText` insufficient for my needs. At that point, I discovered that `textContent` was what I needed. So what's the difference?
+
+It's easy to mix up the difference, but I'll explain what they are in this piece.
+
+Let's see a simple example:
+
+## Example 1 illustrating the difference
+
+Let's say we have this HTML:
+
+```html
+<p id="para">
+  Hello my name is <b>Dillion</b>
+  I like writing articles
+</p>
+```
+
+We have a `p` tag which has some children:
+
+- text--"Hello my name is"
+- `b`--"Dillion"
+- `br`
+- text--I like writing articles
+
+Here's the result on a webpage:
+
+![First Code Example](/posts/first-code-example.png)
+
+Let's see what the result of `textContent` and `innerText` will be:
+
+```js
+const para = document.getElementById("para")
+console.log(para.textContent)
+console.log(para.innerText)
+```
+
+The result of `textContent` is:
+
+```txt
+
+
+    Hello my name is Dillion
+    I like writing articles
+```
+
+The result of `innerText` is:
+
+```txt
+Hello my name is Dillion I like writing articles
+```
+
+What do you notice?
+
+...
+
+`textContent` shows the text exactly--the raw version--how it is in the code. We have a line break, followed by tab space, followed by "Hello my name is Dillion", then a line break, followed by a tab space, followed by "I like writing articles". The reason why we do not have a line break after the sentence (as we have in code) is because we have come to the end of the text.
+
+Interpreted as a string, `textContent` will be "\n Hello my name is Dillion\n I like writing articles". The `\n` represent the new lines.
+
+`innerText` on the other hand shows layout of the text on the screen. Even with multiple new lines, all text is rendered on one line--"Hello my name is Dillion I like writing articles".
+
+Let's see another example, before we move to the theoritical differences.
+
+## Example 2 illustrating the difference
+
+Let's say we have this HTML:
+
+```html
+<style>
+  button {
+    display: none;
+  }
+</style>
+
+<div id="block">
+  <button>Click Me!</button>
+  <br />
+  So you see what happens
+</div>
+```
+
+Here, we have a div, with three children:
+
+- `button`: "Click Me!"
+- `br`
+- text: "So you see what happens".
+
+We also have a styling on the `button` which has a `display` property with the **none** value.
+
+The result on the screen:
+
+![Second Code Example](/posts/second-code-example.png)
+
+Next, let's see the `textContent` and `innerText` results:
+
+```js
+const block = document.getElementById("block")
+console.log(block.textContent)
+console.log(block.innerText)
+```
+
+The result of `textContent`:
+
+```txt
+
+
+    Click Me!
+
+
+    So you see what happens
+```
+
+The result of `innerText`:
+
+```txt
+
+
+So you see what happens
+```
+
+As you see in `textContent`, the result is the raw text string. A line break, followed by a tab space, followed by "Click Me!", followed by another line break, and another, then "So you see what happens". It doesn't matter if the `button` is **none**, `textContent` shows the **raw content**.
+
+As a string, the result of `textContent` will be "\n Click Me!\n\n So you see what happens".
+
+For the result of `innerText`, we see a line break, followed by "\nSo you see what happens". What happened to "Click Me!"? Well, as we saw in the first example, `innerText` is a text representation of the layout. `button` does not exist on the layout due to `display:none`. Only the line break space (`<br/>`) and **So you see what happens** are the texts on the layout.
+
+Does the difference make sense to you now?
+
+## `innerText` property
+
+The `innerText` property is a representation of the rendered text of a HTML element. The rendered text contains the text of the direct children and all descendants of that element.
+
+It's worth noting that `innerText` triggers a re-rendering of the HTML element it is triggered on. The purpose of this is so that `innerText` gets the up-to-date layout information of that element. Re-rendering can be expensive sometimes so doing a lot of `innerText`s can affect the performance of your application.
+
+## `textContent` property
+
+The `textContent` property is a representation of the raw text of a HTML element in the source code. This is the raw text found in the direct children and nested descendants of that element.
+
+Since `textContent` represents the raw text, it doesn't care about how these texts are rendered or styled--which therefore means it doesn't trigger a re-render. Regardless of the styles you apply, the `textContent` of such element will always be the same.
+
+## Key Difference between `innerText` and `textContent`
+
+The key difference between `innerText` and `textContent` is that:
+
+- `innerText` is a representation of the rendered text (what the user sees on the screen), which triggers a re-render when accessed
+- `textContent` is a representation of the raw text (whether it is rendered on the screen or not)=
+
+The `textContent` property also shows the text content of the `<script>` and `<style>`. For example:
+
+```html
+<body id="body">
+  <style>
+    h1 {
+      color: red;
+    }
+  </style>
+
+  <h1>My page</h1>
+
+  <script>
+    console.log("Hello")
+  </script>
+</body>
+```
+
+The result of this page:
+
+![Third Code Example](/posts/third-code-example.png)
+
+Here's the result of `innerText`:
+
+```txt
+My page
+```
+
+Here's the result of `textContent`:
+
+```txt
+
+
+
+
+        h1 {
+            color: red;
+        }
+
+
+
+
+    My page
+
+
+
+
+        console.log("Hello")
+
+
+```
+
+As you can see, `innerText` shows the human-readable text--the rendered text--"My page".
+
+But with `textContent`, you can see the line breaks, the `h1` style declarations (which the text content of the `style` tag), "My page" (text content of `h1` tag), line breaks and 'console.log("Hello")' (the text content of the `script` tag).
+
+## Wrap up
+
+For my use case which I mentioned at the beginning, I wanted a text representation that included the line breaks of the element in the source code. I'm refering to the line breaks that didn't require the `<br/>` tag--normal line spaces as you have in the code file. As we have seen so far, `innerText` doesn't take those line spaces into account, because they aren't rendered on the screen. `textContent` was the property I needed which includes those spaces.
+
+Also, as we saw, `innerText` triggers a re-render but `textContent` doesn't, which means `textContent` is a safe and smooth-to-use option until you actually need `innerText`.
+
+However, you have to be careful with `textContent` because as we have seen so far, it might involve things you do not care about. For example, the contents of the `<style>` and `<script>` tags.
+
+I hope this was helpful and gives you clarity on the differences. Please <Share /> if so 😀

@@ -2,19 +2,20 @@ import React from "react"
 import { Link } from "gatsby"
 
 import styled from "styled-components"
+import { LINKS } from "../../constants"
 
-const LINKS = [
+const NAV_LINKS = [
   {
     label: "Deeecode",
     path: "/",
   },
   {
     label: "Courses",
-    path: "/courses",
+    path: LINKS.courses.path,
   },
   {
     label: "Articles",
-    path: "/articles",
+    path: LINKS.articles,
   },
 ]
 
@@ -70,7 +71,7 @@ export default function Nav({ location }) {
   return (
     <Block pageType={pageType}>
       <ul>
-        {LINKS.map(({ label, path }) => (
+        {NAV_LINKS.map(({ label, path }) => (
           <li>
             <Link activeClassName="active-link" to={path}>
               {label}

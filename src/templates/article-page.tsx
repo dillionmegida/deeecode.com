@@ -3,26 +3,52 @@ import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import Seo from "../components/seo"
+import Share from "../components/mdx/Share"
+import CodeBlock from "../components/mdx/CodeBlock"
+import { MDXProvider } from "@mdx-js/react"
 
 const Container = styled.div`
   .article {
-    &:hover {
-      text-decoration: none;
+    --main-color: var(--color-regular-light);
+    font-size: 20px;
 
-      .article-cover {
-        border-color: var(--color-regular-light);
-      }
-
-      h2 {
-        color: var(--color-regular-light);
-      }
+    &--javascript {
+      --main-color: var(--color-javascript-light);
     }
+
+    &--css {
+      --main-color: var(--color-css);
+    }
+
     &-cover {
       width: 100%;
 
       img {
         width: 100%;
       }
+    }
+
+    h1 {
+      color: var(--main-color);
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+      line-height: 30px;
+    }
+
+    img {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      line-height: 40px;
+    }
+
+    a {
+      color: var(--main-color);
     }
   }
 `
@@ -32,15 +58,20 @@ export default function BlogArticleTemplate({ location, data, children }) {
     currentArticle: { frontmatter },
   } = data
 
+  const components = {
+    Share,
+    code: props => <CodeBlock category={frontmatter.category} {...props} />,
+  }
+
   return (
     <Layout location={location}>
       <Container>
         <div className="article-cover">
           <img src={`/articles/${frontmatter.cover}`} />
         </div>
-        <div className="container">
+        <div className={`container article article--${frontmatter.category}`}>
           <h1>{frontmatter.title}</h1>
-          {children}
+          <MDXProvider components={components}>{children}</MDXProvider>
         </div>
       </Container>
     </Layout>
@@ -63,6 +94,7 @@ export const pageQuery = graphql`
         description
         date(formatString: "MMMM DD, YYYY")
         cover
+        category
         youtubeId
       }
       fields {
