@@ -11,7 +11,6 @@ import CourseLink from "./course-link"
 
 const Container = styled.div`
   font-size: 20px;
-  padding-bottom: 50px;
 
   .part-block {
     text-transform: uppercase;

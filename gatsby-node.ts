@@ -2,10 +2,48 @@ const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const { LINKS } = require("./src/constants")
 
-// Define the template for blog post
-const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
-
+const articlePageTemplate = path.resolve(`./src/templates/article-page.tsx`)
 const coursePageTemplate = path.resolve("./src/templates/course-page/index.tsx")
+
+/**
+ * @type {import('gatsby').GatsbyNode['onCreateNode']}
+ */
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+
+  if (node.internal.type === "Mdx") {
+    const value = createFilePath({ node, getNode })
+
+    if (value.startsWith("/regex") || value.startsWith("/javascript")) {
+      const filepathRegex = /^\/(\w+)\/(\d+)-([\w-]+)/
+
+      const [, courseLabel, courseOrder, coursePath] =
+        value.match(filepathRegex)
+
+      const courseRelativePath = LINKS.courses[courseLabel].sub[coursePath]
+
+      createNodeField({
+        name: `slug`,
+        node,
+        value: courseRelativePath,
+      })
+
+      createNodeField({
+        name: "orderId",
+        node,
+        value: courseOrder,
+      })
+    } else {
+      const articlePath = value.replace(/^(\/\d+-\s)/, "") // replace the number prefix
+
+      createNodeField({
+        name: `slug`,
+        node,
+        value: `/articles${articlePath}`,
+      })
+    }
+  }
+}
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -16,16 +54,26 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: { frontmatter: { date: ASC } }, limit: 1000) {
+      allArticles: allMdx(
+        sort: { frontmatter: { date: ASC } }
+        limit: 1000
+        filter: { fields: { slug: { regex: "//articles//" } } }
+      ) {
         nodes {
           id
           fields {
             slug
           }
+          internal {
+            contentFilePath
+          }
         }
       }
 
-      allMdx(sort: { fields: { orderId: ASC } }) {
+      allCourses: allMdx(
+        sort: { fields: { orderId: ASC } }
+        filter: { fields: { slug: { regex: "//courses//" } } }
+      ) {
         nodes {
           id
           fields {
@@ -48,25 +96,22 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
-  const courses = result.data.allMdx.nodes
+  const articles = result.data.allArticles.nodes
+  const courses = result.data.allCourses.nodes
 
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+  if (articles.length > 0) {
+    articles.forEach((article, index) => {
+      const previousArticleId = index === 0 ? null : articles[index - 1].id
+      const nextArticleId =
+        index === articles.length - 1 ? null : articles[index + 1].id
 
       createPage({
-        path: post.fields.slug,
-        component: blogPost,
+        path: article.fields.slug,
+        component: `${articlePageTemplate}?__contentFilePath=${article.internal.contentFilePath}`,
         context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
+          id: article.id,
+          previousArticleId,
+          nextArticleId,
         },
       })
     })
@@ -87,47 +132,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nextCourseId,
         },
       })
-    })
-  }
-}
-
-/**
- * @type {import('gatsby').GatsbyNode['onCreateNode']}
- */
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-
-    const postPath = value.replace(/^(\/\d+\.\s)/, "") // replace the number prefix
-
-    createNodeField({
-      name: `slug`,
-      node,
-      value: postPath,
-    })
-  }
-
-  if (node.internal.type === "Mdx") {
-    const value = createFilePath({ node, getNode })
-
-    const filepathRegex = /^\/(\w+)\/(\d+)-([\w-]+)/
-
-    const [, courseLabel, courseOrder, coursePath] = value.match(filepathRegex)
-
-    const courseRelativePath = LINKS.courses[courseLabel].sub[coursePath]
-
-    createNodeField({
-      name: `slug`,
-      node,
-      value: courseRelativePath,
-    })
-
-    createNodeField({
-      name: "orderId",
-      node,
-      value: courseOrder,
     })
   }
 }

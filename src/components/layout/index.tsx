@@ -24,14 +24,12 @@ const Wrapper = styled.div<{ theme: Theme }>`
     padding: var(--spacing-5) var(--spacing-5);
   }
 
-  footer {
-    a {
-      color: var(${({ theme }) => theme.link});
-      text-decoration: none;
+  a {
+    color: var(${({ theme }) => theme.link});
+    text-decoration: none;
 
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 
@@ -44,6 +42,10 @@ const Container = styled.div`
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
+
+  .main {
+    padding-bottom: 50px;
+  }
 `
 
 type Props = {
@@ -55,7 +57,7 @@ type Props = {
 const Layout = ({ location, children, theme = "regular" }: Props) => {
   const themeObj = {
     bg: `--color-${theme}-dark`,
-    link: `--color-${theme}`,
+    link: `--color-${theme}-light`,
   }
 
   return (

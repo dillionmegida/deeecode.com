@@ -13,8 +13,8 @@ const LINKS = [
     path: "/courses",
   },
   {
-    label: "Regex",
-    path: "/courses/regex",
+    label: "Articles",
+    path: "/articles",
   },
 ]
 
@@ -36,24 +36,25 @@ const Block = styled.nav<{ pageType: string }>`
   li {
     flex: 1;
     width: 100%;
-  }
 
-  a {
-    color: white;
-    text-decoration: none;
-    flex: 1;
-    width: 100%;
-    display: inline-block;
-    padding: 20px 15px;
-    text-align: center;
+    a {
+      color: white;
+      text-decoration: none;
+      flex: 1;
+      width: 100%;
+      display: inline-block;
+      padding: 20px 15px;
+      text-align: center;
 
-    &.active-link,
-    &:hover {
-      background-color: var(--color-${({ pageType }) => pageType}-dark-3);
-      transition: background-color 300ms;
+      &.active-link,
+      &:hover {
+        background-color: var(--color-${({ pageType }) => pageType}-dark-3);
+        transition: background-color 300ms;
+        text-decoration: none;
 
-      &:not(:hover) {
-        font-weight: 800;
+        &:not(:hover) {
+          font-weight: 800;
+        }
       }
     }
   }

@@ -12,18 +12,18 @@ const Container = styled.div`
 const COURSES = [
   {
     label: "Regular Expressions Simplified",
-    path: LINKS.courses.regex.path
+    path: LINKS.courses.regex.path,
   },
   {
     label: "JavaScript Simplified for Beginners",
-    path: LINKS.courses.javascript.path
+    path: LINKS.courses.javascript.path,
   },
 ]
 
 export default function Courses({ location }) {
   return (
     <Layout location={location}>
-      <Container>
+      <Container className="container">
         <h1>Courses</h1>
         <p>
           Here are all the courses I've created to help you understand the web

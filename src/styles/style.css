@@ -55,7 +55,7 @@
 
   /* colors */
   --color-regular: #2b95f6;
-  --color-primary-light: #7ebcf7;
+  --color-regular-light: #7ebcf7;
   --color-text: #2e353f;
   --color-text-light: #4f5969;
   --color-heading: #fff;
@@ -68,11 +68,13 @@
   --color-regular-dark-3: #2f3d4e;
   
   --color-regex: #a7ff72;
+  --color-regex-light: #bbfb93;
   --color-regex-dark: #000c0c;
   --color-regex-dark-2: #001212;
   --color-regex-dark-3: #436131;
 
   --color-javascript: #F7DF1E;
+  --color-javascript-light: #f8e765;
   --color-javascript-dark: #0c0a01;
   --color-javascript-dark-2: #1a1703;
   --color-javascript-dark-3: #3c3506;
