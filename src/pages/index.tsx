@@ -20,13 +20,13 @@ const Bio = styled.div`
   margin-bottom: var(--spacing-16);
 
   a {
-    color: var(--color-primary-light);
+    font-weight: 800;
   }
 `
 
 const IndexPage = ({ location }) => {
   return (
-    <Layout location={location}>
+    <Layout location={location} theme='regular'>
       <Container>
         <Cover className="page-cover">
           <img src="/banner.png" alt="Deeecode cover" />
@@ -49,7 +49,7 @@ const IndexPage = ({ location }) => {
               </Link>
             </p>
             <p>
-              Owned, by Dillion. Check me out on{" "}
+              Managed, by Dillion. Check me out on{" "}
               <a href={`https://twitter.com/iamdillion`}>Twitter @iamdillion</a>
             </p>
           </Bio>

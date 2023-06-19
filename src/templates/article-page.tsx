@@ -6,18 +6,29 @@ import Seo from "../components/seo"
 import Share from "../components/mdx/Share"
 import CodeBlock from "../components/mdx/CodeBlock"
 import { MDXProvider } from "@mdx-js/react"
+import HeadingLink from "../components/mdx/HeadingLink"
 
 const Container = styled.div`
   .article {
     --main-color: var(--color-regular-light);
-    font-size: 20px;
+    --font-size: 19px;
+    font-size: var(--font-size);
+    color: #dfdbdb;
+
+    .inline-code {
+      font-size: calc(var(--font-size) - 3px);
+    }
+
+    .multiline-code {
+      font-size: calc(var(--font-size) - 2px);
+    }
 
     &--javascript {
       --main-color: var(--color-javascript-light);
     }
 
     &--css {
-      --main-color: var(--color-css);
+      --main-color: var(--color-css-light);
     }
 
     &-cover {
@@ -35,7 +46,7 @@ const Container = styled.div`
     ul {
       list-style: disc;
       padding-left: 20px;
-      line-height: 30px;
+      line-height: 20px;
     }
 
     img {
@@ -45,6 +56,11 @@ const Container = styled.div`
 
     h2 {
       line-height: 40px;
+      font-size: 30px;
+
+      .inline-code {
+        font-size: 24px;
+      }
     }
 
     a {
@@ -61,10 +77,12 @@ export default function BlogArticleTemplate({ location, data, children }) {
   const components = {
     Share,
     code: props => <CodeBlock category={frontmatter.category} {...props} />,
+    h2: props => <HeadingLink Tag="h2" {...props} />,
+    h3: props => <HeadingLink Tag="h3" {...props} />,
   }
 
   return (
-    <Layout location={location}>
+    <Layout location={location} theme={frontmatter.category}>
       <Container>
         <div className="article-cover">
           <img src={`/articles/${frontmatter.cover}`} />

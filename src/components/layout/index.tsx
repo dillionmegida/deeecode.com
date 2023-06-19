@@ -64,7 +64,7 @@ const Layout = ({ location, children, theme = "regular" }: Props) => {
     <Wrapper className="global-wrapper" theme={themeObj}>
       <Container>
         <header className="global-header">
-          <Nav location={location} />
+          <Nav pageType={theme} location={location} />
           {/* <Link className="header-link-home" to="/">
           <h1>{title}</h1>
         </Link> */}

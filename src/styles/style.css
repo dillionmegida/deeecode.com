@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 :root {
   --maxWidth-none: "none";
@@ -62,24 +63,27 @@
   --color-heading-black: black;
   --color-accent: #d1dce5;
 
-  
   --color-regular-dark: #0c1116;
   --color-regular-dark-2: #171f28;
   --color-regular-dark-3: #2f3d4e;
-  
+
   --color-regex: #a7ff72;
   --color-regex-light: #bbfb93;
   --color-regex-dark: #000c0c;
   --color-regex-dark-2: #001212;
   --color-regex-dark-3: #436131;
 
-  --color-javascript: #F7DF1E;
+  --color-javascript: #f7df1e;
   --color-javascript-light: #f8e765;
   --color-javascript-dark: #0c0a01;
   --color-javascript-dark-2: #1a1703;
   --color-javascript-dark-3: #3c3506;
 
   --color-css: var(--color-regular);
+  --color-css-light: var(--color-regular-light);
+  --color-css-dark: var(--color-regular-dark);
+  --color-css-dark-2: var(--color-regular-dark-2);
+  --color-css-dark-3: var(--color-regular-dark-3);
 }
 
 /* HTML elements */
@@ -126,7 +130,8 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
-  margin-top: var(--spacing-12);
+  margin-top: var(--spacing-0);
+  padding-top: var(--spacing-4);
   margin-bottom: var(--spacing-6);
   line-height: var(--lineHeight-tight);
   letter-spacing: -0.025em;

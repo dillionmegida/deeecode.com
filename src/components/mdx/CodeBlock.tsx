@@ -6,10 +6,12 @@ const Inline = styled.span<{ theme }>`
   padding: 4px;
   background-color: ${({ theme }) => theme.bg};
   border-radius: 5px;
+  font-family: "Roboto Mono";
 `
 
 const Multiline = styled.div`
   margin-bottom: 20px;
+  font-family: "Roboto Mono";
 
   .block {
     padding: 25px 40px 0 20px;
@@ -30,10 +32,17 @@ export default function CodeBlock({
   const inline = !className
 
   if (inline)
-    return <Inline theme={{ bg: `var(--color-${category}-dark-3)` }}>{children}</Inline>
+    return (
+      <Inline
+        className="inline-code"
+        theme={{ bg: `var(--color-${category}-dark-3)` }}
+      >
+        {children}
+      </Inline>
+    )
 
   return (
-    <Multiline>
+    <Multiline className="multiline-code">
       <Highlight theme={themes.dracula} code={children} language={language}>
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <pre className="block" style={{ ...style }}>
