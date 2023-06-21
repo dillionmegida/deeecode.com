@@ -8,6 +8,7 @@ import CodeBlock from "../../components/mdx/CodeBlock"
 import YouTube from "react-youtube"
 import CourseNav from "./course-nav"
 import CourseLink from "./course-link"
+import HeadingLink from "../../components/mdx/HeadingLink"
 
 const Container = styled.div`
   font-size: 20px;
@@ -40,6 +41,12 @@ const Container = styled.div`
 
   ol {
     list-style: decimal;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 20px;
+    line-height: 20px;
   }
 
   h1 {
@@ -98,6 +105,8 @@ const Container = styled.div`
 const components = {
   code: CodeBlock,
   CourseLink,
+  h2: props => <HeadingLink Tag="h2" {...props} />,
+  h3: props => <HeadingLink Tag="h3" {...props} />,
 }
 
 export default function CoursePageTemplate({ location, data, children }) {

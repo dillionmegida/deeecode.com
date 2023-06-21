@@ -70,7 +70,7 @@
   --color-regex: #a7ff72;
   --color-regex-light: #bbfb93;
   --color-regex-dark: #000c0c;
-  --color-regex-dark-2: #001212;
+  --color-regex-dark-2: #011e1e;
   --color-regex-dark-3: #436131;
 
   --color-javascript: #f7df1e;
@@ -204,6 +204,10 @@ ol {
   margin-bottom: var(--spacing-8);
   list-style-position: outside;
   list-style-image: none;
+}
+
+strong {
+    font-weight: 600;
 }
 
 ul li,

@@ -1,0 +1,150 @@
+---
+title: "Flags used in Regular Expressions"
+description: "Let's understand 4 common flags used in regular expressions"
+cover: flags-cover.png
+youtubeId: _P64DS2GtmE
+---
+
+In the previous lesson, we saw how to create a regular expression using literal notation and we created our first regular expression on [regex101.com](https://regex101.com).
+
+In this video, we'll learn about flags--their relevance and how to use them.
+
+## What are Flags?
+
+Flags are parameters you pass to a regex construct which alters some of its default behaviour.
+
+There are a couple of flags, some which may differ across different programming languages or regex engines. But in this article, we'll look at four common flags:
+
+- `g` - Global Flag
+- `i` - Case-Insensitive Flag
+- `s` - Newline (or Single line) Flag
+- `m` - Multiline Match Flag
+
+In a literal notation, you can pass one or more flags after the last forward slash:
+
+```js
+/pattern/flags
+```
+
+For example, you can pass the `g` and `i` flags like this:
+
+```js
+;/pattern/gi
+```
+
+But what do these flags mean? Let's look at them.
+
+## The Global Flag `g`
+
+By default, your regex pattern will only return the first set of characters in a string that matches. If you want to match all set of characters that match your pattern, then you add this flag at the end of the regex.
+
+In the previous lesson, I used an example string of:
+
+```txt
+my channel is deeecode, and I make videos on code
+```
+
+and the pattern was `/code/`. This pattern matched only the first occurence of code:
+
+```txt
+my channel is deee<hi>code</hi>, and I make videos on code
+```
+
+By passing a `g` flag to the regular expression, `/code/g`, the pattern will match more than one occurrence, which is also the second occurrence of "code":
+
+```txt
+my channel is deee<hi>code</hi>, and I make videos on <hi>code</hi>
+```
+
+## The Case Insensitive Flag `i`
+
+By default, your regex patterns are case sensitive. This means: `/hello/` will not match the "Hello" in "Hello, how are you" because the cases are not the same (lower "h" and capital "H" not the same).
+
+To remove that case restriction on your regex pattern, apply this flag. Now, `/hello/i` will match the "Hello" in your string:
+
+```txt
+<hi>Hello</hi>, how are you
+```
+
+## The Newline Flag `s`
+
+By default, the dot sign `.` is a special character that matches any kind of character **except a newline**.
+
+Don't worry too much about special characters for now, there's a dedicated lesson for that. Let's just focus on the dot sign.
+
+So, this flag allows the dot sign `.` to match newlines also.
+
+For example, this pattern `/hello.hi/` will match **"hello hi"**, **"hello_hi"**, **"hello8hi"**, but will not match:
+
+```txt
+hello
+hi
+```
+
+The reason is that `.` matches any character except a new line. But with the `s` flag, `hello.hi/s`, `.` can now match a newline:
+
+```txt
+<hi>hello                               </hi>
+<hi>hi</hi>
+```
+
+## The Multiline Match Flag `m`
+
+The caret symbol, `^`, when used at the beginning of a regular expression is used to match the beginning of a string, and the dollar symbol, `$`, when used at the end of a regular expression is used to match the end of a string.
+
+I have a separate lesson on special characters where we would get to see these symbols in more detail, but here is where the multiline match flag comes in.
+
+Save we have this sentence:
+
+```txt
+Aisha likes to code.
+Aisha also likes to play basketball
+```
+
+And we have this pattern `/Aisha/g`. With the global flag `g` on, you see that it matches both "Aisha"s:
+
+```txt
+<hi>Aisha</hi> likes to code.
+<hi>Aisha</hi> also likes to play basketball
+```
+
+Using the caret symbol, called the beginning character, we can choose to match "Aisha" only if it begins the string. We do that by adding the caret symbol at the beginning: `/^Aisha/g`:
+
+```txt
+<hi>Aisha</hi> likes to code.
+Aisha also likes to play basketball
+```
+
+Now you see that only the Aisha that begins the string is matched. But on the second line, "Aisha" begins the sentence right…why is it not matched?
+
+Well by default, again, default, the beginning character considers everything as **one string**, and only matches the beginning. Even if you have 10 lines, it would consider everything as one string, but if we want the beginning character to match different lines of the string, then we use the `m` flag.
+
+By applying the `m` flag, `/^Aisha/gm`:
+
+```txt
+<hi>Aisha</hi> likes to code.
+<hi>Aisha</hi> also likes to play basketball
+```
+
+You see now that "Aisha" that begins the first line is matched, and "Aisha" that begins the second line is matched.
+
+But if I have something before "Aisha" on the second line, it is not matched anymore:
+
+```txt
+<hi>Aisha</hi> likes to code.
+2. Aisha also likes to play basketball
+```
+
+The same thing applies to the `$` sign
+
+I'll explain more about this in the special characters lesson.
+
+## Wrap up
+
+There are other flags not just these…these 4 are widely supported.
+
+You can see how these flags change the default behaviour in different ways. So when you're writing regular expressions, there are times you'd want to achieve something that is turned off by default…you'd need one or more of these flags.
+
+As we progress in this series, you'd see us using `g` a lot.
+
+Now that you know what flags are, let's move on to start learning how to create interesting patterns.
