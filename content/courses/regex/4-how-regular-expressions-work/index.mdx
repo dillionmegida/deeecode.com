@@ -1,0 +1,97 @@
+---
+title: How a Regular Expression Works - REGEX ENGINES
+date: "2023-06-16"
+description: "Here's how Backtracking Regex Engines work for executing regular expressions on a string"
+cover: how-a-regular-expression-works-cover.png
+youtubeId: w-3uicbGwpA
+---
+
+Before we move further to start creating advanced regular expressions, I want to quickly explain how a regular expression works.
+
+What you should know is that a regular expression is just a string that defines a pattern. For example:
+
+```txt
+/name/
+/code/
+/code/<hi>ig</hi>
+```
+
+These are just pattern definitions using the literal notation. What actually applies these pattern definitions on strings is a **REGEX ENGINE**.
+
+A regex engine is responsible for finding AND returning the parts of a string that matches a defined pattern.
+
+So your programming languages like JavaScript, Python, PHP—they all have these regex engines for executing regular expressions.
+
+There are two major types of regex engines—**Backtracking** regex engines and **Finite-state** regex engines.
+
+In this course, we're going to focus on Backtracking regex engines as that is what is most common in programming languages.
+
+## Backtracking Regex Engines
+
+Here is what happens in when executing regular expressions with backtracking regex engines.
+
+When you apply a regular expression to a string, the engine does a search through the string from left to right. What happens is that, it starts searching from the beginning, until it encounters the first token, or you can say first character in the string that matches the first character in your pattern.
+
+So let's say you have a pattern like `/code/` and you have a string like:
+
+```txt
+She is coming to school to code but I could not come to code
+```
+
+The engine starts searching the string to find a “c”, since that is what begins the pattern. It finds a “c” at position 7 (counting from 0). It considers this a potential match. The engine keeps record of position 7 as its start.
+
+Next up in the pattern is “o”, so the engine checks if “o” comes after the “c” it found in the string. It sees that there's “co”, so things are going well so far.
+
+Next up in the pattern is “d”, so the engine checks if “d” comes after the “co” it has found so far in the string. Ooops…there is no “d”, instead it sees an “m”. This is the engine's cue or signal that this part of the string is not a match for the defined pattern.
+
+Now this is where the backtracking occurs. The engine would backtrack to the position 7 where it found a potential match. Since it has verified that it wasn't an actual match, the engine would try to look for the next potential match.
+
+So it keeps searching until it finds another “c” which again comes from the pattern. It sees another “c” at position 18 (the "c") in school. Again, the engine keeps record of this position as the start. It checks if "o" (from the pattern) comes after the "c" it found. Unfortunately, "h" comes after "c", so this it not a valid match. The engine backtracks to position 18 where it stopped.
+
+The engine continues searching again and finds a "c" at position 27 (after "to "). The engine keeps record of this position again.
+
+Next in the pattern is “o”, the engine checks if “o” comes after the “c” it found. There's an “o”, so we have “co” matching so far. Awesome. From the pattern, we have “d” next, so the engine checks if “d” comes after the “co” it has found so far. Wooo…there's a “d”, so we have “cod” so far.
+
+COD Call of Duty 😅
+
+The engine is like We're almost there…almost there. Next up in the pattern is “e”, so the engine checks if “e” comes after the “cod” it has found so far. Amazing! there's an “e”, so we have “code” so far, which is an exact match for the pattern. The engine has found the exact match, and so it stops searching, and returns that match:
+
+```txt
+She is coming to school to <hi>code</hi> but I could not come to code
+```
+
+But, there's another match for the code pattern (at the end of the string) and the engine only gets the first match.
+
+As we saw in <CourseLink course='regex' path="flags" label='the flags lesson' />, the default behaviour of regular expressions is to return ONLY the first match. But now that we want to get all the matches, we use the `g` flag: `/code/g`.
+
+By applying the “g” flag, you see we get all substrings that matches the pattern.
+
+By applying a “g” flag, here's what the regex engine does. So after it has found the first part of the string that matches the defined pattern, it takes note of the substring and continues searching from there. Without the “g” flag, it would stop searching after the first match.
+
+Now that we have changed the default behaviour, it continues searching for another potential match. It finds the “c” at position 38 (in "could"). It checks if it is followed by “o”. It is. So it checks if it is followed “d” and unfortunately it's not. Backtracks again.
+
+
+It finds a "c" at position 48 (in "come"). Does "o" come after it, yes. Does "d" come after the "o", no! Backtracks again.
+
+
+If finds a "c" at position 56 (in "code"). Does "o" come after it, yes. Does "d" come after the "o", yes. Almost there…then it checks if it is followed by “e”, and it actually is. So we have “code” which is an exact match for the pattern.
+
+The engine also takes note of this substring. We have two matches so far:
+
+```txt
+She is coming to school to <hi>code</hi> but I could not come to <hi>code</hi>
+```
+
+And now the engine comes to the end of the string. If the string had not stopped here, the engine would keep searching for more matches until the end of the string.
+
+So by default, a regex engine searches through a string, looks for the first substring that matches the pattern and on finding that substring, it stops searching.
+
+But with the “g” flag, the engine searches through a string, to find all the matches, and it doesn't stop searching until it gets to the end of the string.
+
+## Wrap Up
+
+So this is how backtracking regex engines work and programming languages like JavaScript, Python, JAVA, PHP and much more use this regex engine implementation in the background for applying regular expressions on strings.
+
+It's important to understand this concept as we progress in this course, so I hope you now understand how regular expressions work under the hood.
+
+Let's move forward to learning how to create advanced regular expressions

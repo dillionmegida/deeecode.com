@@ -11,7 +11,17 @@ import CourseLink from "./course-link"
 import HeadingLink from "../../components/mdx/HeadingLink"
 
 const Container = styled.div`
-  font-size: 20px;
+  --font-size: 19px;
+  font-size: var(--font-size);
+  color: #dfdbdb;
+
+  .inline-code {
+    font-size: calc(var(--font-size) - 3px);
+  }
+
+  .multiline-code {
+    font-size: calc(var(--font-size) - 2px);
+  }
 
   .part-block {
     text-transform: uppercase;
@@ -34,8 +44,10 @@ const Container = styled.div`
   ul,
   ol {
     padding-left: 20px;
+    list-style-position: initial;
     li {
       margin-bottom: 10px;
+      padding-left: 10px;
     }
   }
 
@@ -63,32 +75,6 @@ const Container = styled.div`
     iframe {
       width: 100%;
       min-height: 300px;
-    }
-  }
-
-  .course-nav {
-    margin: 20px var(--spacing-5);
-    font-size: 18px;
-    display: flex;
-    justify-content: space-between;
-
-    &--just-next {
-      justify-content: flex-end;
-    }
-
-    &--prev,
-    &--next {
-      margin-bottom: 10px;
-    }
-
-    &--prev {
-      justify-self: flex-start;
-      text-align: left;
-    }
-
-    &--next {
-      justify-self: flex-end;
-      text-align: right;
     }
   }
 `
