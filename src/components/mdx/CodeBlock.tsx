@@ -20,6 +20,25 @@ const Multiline = styled.div`
     overflow-x: auto;
     line-height: 30px;
   }
+
+  .inline-highlight {
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+
+    &::before {
+      content: "";
+      background-color: #57f657;
+      position: absolute;
+      left: -3px;
+      border-radius: 2px;
+      z-index: 0;
+      opacity: .2;
+      width:calc(100% + 6px);
+      height: 80%;
+      top: 4px;
+    }
+  }
 `
 
 export default function CodeBlock({
@@ -50,9 +69,27 @@ export default function CodeBlock({
               const lineProps = getLineProps({ line, key: index })
               return (
                 <div key={index} {...lineProps}>
-                  {line.map((token, key, i) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
+                  {line.map((token, key, i) => {
+                    if (
+                      token.content.includes("<hi>") &&
+                      token.types.includes("plain")
+                    ) {
+                      return (
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: token.content
+                              .replace(
+                                /<hi>/g,
+                                `<span class='inline-highlight'>`
+                              )
+                              .replace(/<\/hi>/, "</span>"),
+                          }}
+                        />
+                      )
+                    }
+
+                    return <span key={key} {...getTokenProps({ token, key })} />
+                  })}
                 </div>
               )
             })}
