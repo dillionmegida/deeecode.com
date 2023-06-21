@@ -271,6 +271,10 @@ a:focus {
   margin: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 .post-list-item {
   margin-bottom: var(--spacing-12);
   margin-top: var(--spacing-8);

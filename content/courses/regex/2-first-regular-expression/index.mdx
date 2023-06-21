@@ -48,21 +48,16 @@ Here, we can specify the language…
 
 Here, we can enter a string and pattern, as see the matches in the string. We already have the forward slash at the beginning and at the end on this website, so we don’t need to write that again.
 
-Let's say we have a simple string like "my name is Dillion". And we want to write a pattern that matches "name" in this string. Our regex pattern will be simply:
-name
+Let's say we have a simple string like "my name is Dillion". And we want to write a pattern that matches "name" in this string. Our regex pattern will be simply be `/name/`:
 
-```jsx
-/name/
-```
+<Regex pattern="/name/" input="my name is Dillion" / >
 
 As you can see, this pattern matches the "name" part in our full string. We can call this part a substring.
 
 Let's look at another example. Say a string like "my channel is deeecode, and I make videos on code". And our pattern is simply:
-code
+`/code/`
 
-```jsx
-/code/
-```
+<Regex pattern="/name/" input="my channel is deeecode, and I make videos on code" / >
 
 As you can see, this pattern matches only one "code" substring, which is the one in "deeecode". But the second "code" is not matched. By default, a regex pattern only matches the first occurrence that fits the pattern. If we want to change the default behaviour of regex patterns, this is where we introduce flags.
 

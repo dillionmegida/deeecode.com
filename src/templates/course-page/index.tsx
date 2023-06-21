@@ -9,6 +9,7 @@ import YouTube from "react-youtube"
 import CourseNav from "./course-nav"
 import CourseLink from "./course-link"
 import HeadingLink from "../../components/mdx/HeadingLink"
+import RegexBlock from "../../components/RegexBlock"
 
 const Container = styled.div`
   --font-size: 19px;
@@ -91,6 +92,7 @@ const Container = styled.div`
 const components = {
   code: CodeBlock,
   CourseLink,
+  Regex: RegexBlock,
   h2: props => <HeadingLink Tag="h2" {...props} />,
   h3: props => <HeadingLink Tag="h3" {...props} />,
 }

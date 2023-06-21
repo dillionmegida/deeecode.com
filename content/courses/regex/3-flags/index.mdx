@@ -38,33 +38,33 @@ But what do these flags mean? Let's look at them.
 
 By default, your regex pattern will only return the first set of characters in a string that matches. If you want to match all set of characters that match your pattern, then you add this flag at the end of the regex.
 
-In the previous lesson, I used an example string of:
+In the previous lesson, I used this example:
 
-```txt
-my channel is deeecode, and I make videos on code
-```
+<Regex
+  pattern="/code/"
+  input="my channel is deeecode, and I make videos on code"
+/>
 
-and the pattern was `/code/`. This pattern matched only the first occurence of code:
-
-```txt
-my channel is deee<hi>code</hi>, and I make videos on code
-```
+This pattern matched only the first occurence of code:
 
 By passing a `g` flag to the regular expression, `/code/g`, the pattern will match more than one occurrence, which is also the second occurrence of "code":
 
-```txt
-my channel is deee<hi>code</hi>, and I make videos on <hi>code</hi>
-```
+<Regex
+  pattern="/code/g"
+  input="my channel is deeecode, and I make videos on code"
+/>
 
 ## The Case Insensitive Flag `i`
 
-By default, your regex patterns are case sensitive. This means: `/hello/` will not match the "Hello" in "Hello, how are you" because the cases are not the same (lower "h" and capital "H" not the same).
+By default, your regex patterns are case sensitive. This means: `/hello/` will not match the "Hello" in "Hello, how are you":
+
+<Regex pattern="/hello/" input="Hello, how are you" />
+
+This is because the cases are not the same (lower "h" and capital "H" not the same).
 
 To remove that case restriction on your regex pattern, apply this flag. Now, `/hello/i` will match the "Hello" in your string:
 
-```txt
-<hi>Hello</hi>, how are you
-```
+<Regex pattern="/hello/i" input="Hello, how are you" />
 
 ## The Newline Flag `s`
 
