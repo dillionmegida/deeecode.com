@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
   background-color: #282a36;
   border-radius: 10px;
   border-top-left-radius: 0px;
-  margin: 15px 0;
+  margin: 40px 0 30px;
   position: relative;
   color: white;
   width: 100%;
@@ -21,12 +21,15 @@ const Container = styled.div`
       margin-right: 20px;
       color: #979ecd;
       width: 60px;
-      margin-top: 10px;
+      position: relative;
+      top: 12px;
     }
 
     &__string {
       border: 1px solid transparent;
-      display: inline-block;
+      line-height: 25px;
+      font-family: "Roboto Mono";
+      font-size: 18px;
     }
 
     &__input {
@@ -60,10 +63,11 @@ const Container = styled.div`
   /* input {
   } */
 
-  .controls {
+  .block-top {
     position: absolute;
-    top: -20px;
+    top: -25px;
     left: 0;
+    display: flex;
 
     button {
       background-color: #131419;
@@ -74,26 +78,33 @@ const Container = styled.div`
       width: 60px;
       text-align: center;
       color: white;
+
+      &.match-btn {
+        background-color: var(--color-regex);
+        color: #131419;
+      }
+    }
+
+    .invalid-text {
+      border: 1px solid #282a36;
+      display: block;
+      background-color: #f43b3b;
+      font-weight: 600;
+      font-size: 14px;
+      color: white;
+      padding: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
   .match {
     font-weight: 600;
-    display: inline-block;
     position: relative;
-
-    &::before {
-      content: "";
-      background-color: #57f657;
-      position: absolute;
-      left: -3px;
-      border-radius: 2px;
-      z-index: 0;
-      opacity: 0.2;
-      width: calc(100% + 6px);
-      height: calc(100% + 5px);
-      top: -2px;
-    }
+    background-color: #2c5c2c;
+    padding: 1px;
+    border-radius: 2px;
   }
 `
 
@@ -101,22 +112,49 @@ export default function RegexBlock({ pattern, input }) {
   const [editingString, setEditingString] = useState(false)
   const [patternInput, setPatternInput] = useState(pattern)
   const [stringInput, setStringInput] = useState(input)
+  const [invalidRegex, setInvalidRegex] = useState(false)
+  const [modifiedString, setModifiedString] = useState("")
 
-  const regexRegex = /\/(.*)\/(\w+)?/
+  const findMatches = () => {
+    try {
+      const regexRegex = /\/(.*)\/(\w+)?/
 
-  const [, patternAsString, flags] = patternInput.match(regexRegex)
+      const [, patternAsString, flags] = patternInput.match(regexRegex)
 
-  const regexPattern = new RegExp(patternAsString, flags)
+      const regexPattern = new RegExp(patternAsString, flags)
 
-  const modifiedString = editingString
-    ? stringInput
-    : stringInput.replace(regexPattern, match => {
-        return `<span class="match">${match.replace(/\s/, '&nbsp;')}</span>`
-      })
+      const newModifiedString = stringInput
+        .replace(regexPattern, match => {
+          if (match.includes("\n")) {
+            return match.replace(
+              /.+/g,
+              brokenMatch =>
+                `<span class="match">${brokenMatch.replace(
+                  /\s/g,
+                  "&nbsp;"
+                )}</span>`
+            )
+          } else {
+            return `<span class="match">${match
+              .replace(/\n/g, "<br/>")
+              .replace(/\s/g, "&nbsp;")}</span>`
+          }
+        })
 
-  const findMatches = e => {
-    setEditingString(false)
+        .replace(/\n/g, "<br/>")
+
+      setModifiedString(newModifiedString)
+
+      if (invalidRegex) setInvalidRegex(false)
+      setEditingString(false)
+    } catch (e) {
+      if (!invalidRegex) setInvalidRegex(true)
+    }
   }
+
+  useEffect(() => {
+    findMatches()
+  }, [])
 
   return (
     <Container>
@@ -144,17 +182,24 @@ export default function RegexBlock({ pattern, input }) {
         ) : (
           <textarea
             className="input-block__input"
-            value={modifiedString}
+            value={stringInput}
             // onBlur={findMatches}
             onChange={e => setStringInput(e.target.value)}
           />
         )}
       </div>
-      <div className="controls">
+      <div className="block-top">
         {editingString ? (
-          <button onClick={findMatches}>Match</button>
+          <button className="match-btn" onClick={findMatches}>
+            Match
+          </button>
         ) : (
-          <button onClick={() => setEditingString(true)}>Edit</button>
+          <button className="edit-btn" onClick={() => setEditingString(true)}>
+            Edit
+          </button>
+        )}
+        {invalidRegex && (
+          <span className="invalid-text">Invalid Regex pattern</span>
         )}
       </div>
     </Container>

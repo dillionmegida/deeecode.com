@@ -57,7 +57,7 @@ As you can see, this pattern matches the "name" part in our full string. We can 
 Let's look at another example. Say a string like "my channel is deeecode, and I make videos on code". And our pattern is simply:
 `/code/`
 
-<Regex pattern="/name/" input="my channel is deeecode, and I make videos on code" / >
+<Regex pattern="/code/" input="my channel is deeecode, and I make videos on code" / >
 
 As you can see, this pattern matches only one "code" substring, which is the one in "deeecode". But the second "code" is not matched. By default, a regex pattern only matches the first occurrence that fits the pattern. If we want to change the default behaviour of regex patterns, this is where we introduce flags.
 

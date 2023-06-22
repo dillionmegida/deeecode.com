@@ -74,19 +74,29 @@ Don't worry too much about special characters for now, there's a dedicated lesso
 
 So, this flag allows the dot sign `.` to match newlines also.
 
-For example, this pattern `/hello.hi/` will match **"hello hi"**, **"hello_hi"**, **"hello8hi"**, but will not match:
+For example, this pattern `/hello.hi/` will match **"hello hi"**, **"hello_hi"**, **"hello8hi"**:
 
-```txt
-hello
-hi
-```
+<Regex
+  pattern="/hello.hi/g"
+  input="hello hi and hello_hi and hello8hi"
+/>
+
+But it will not match:
+
+<Regex
+  pattern="/hello.hi/"
+  input={`hello
+hi`}
+/>
+
 
 The reason is that `.` matches any character except a new line. But with the `s` flag, `hello.hi/s`, `.` can now match a newline:
 
-```txt
-<hi>hello                               </hi>
-<hi>hi</hi>
-```
+<Regex
+  pattern="/hello.hi/s"
+  input={`hello
+hi`}
+/>
 
 ## The Multiline Match Flag `m`
 
@@ -103,37 +113,39 @@ Aisha also likes to play basketball
 
 And we have this pattern `/Aisha/g`. With the global flag `g` on, you see that it matches both "Aisha"s:
 
-```txt
-<hi>Aisha</hi> likes to code.
-<hi>Aisha</hi> also likes to play basketball
-```
+<Regex
+  pattern="/Aisha/g"
+  input={`Aisha likes to code.
+Aisha also likes to play basketball`}
+/>
 
-Using the caret symbol, called the beginning character, we can choose to match "Aisha" only if it begins the string. We do that by adding the caret symbol at the beginning: `/^Aisha/g`:
+Using the caret symbol, called the beginning character, we can choose to match "Aisha" only if it begins the string. We do that by adding the caret symbol at the beginning:
 
-```txt
-<hi>Aisha</hi> likes to code.
-Aisha also likes to play basketball
-```
+<Regex
+  pattern="/^Aisha/g"
+  input={`Aisha likes to code.
+Aisha also likes to play basketball`}
+/>
 
 Now you see that only the Aisha that begins the string is matched. But on the second line, "Aisha" begins the sentence right…why is it not matched?
 
-Well by default, again, default, the beginning character considers everything as **one string**, and only matches the beginning. Even if you have 10 lines, it would consider everything as one string, but if we want the beginning character to match different lines of the string, then we use the `m` flag.
+Well by default, again, default, the beginning character considers everything as **one string**, and only matches the beginning. Even if you have 10 lines, it would consider everything as one string, but if we want the beginning character to match different lines of the string, then we use the `m` flag:
 
-By applying the `m` flag, `/^Aisha/gm`:
-
-```txt
-<hi>Aisha</hi> likes to code.
-<hi>Aisha</hi> also likes to play basketball
-```
+<Regex
+  pattern="/^Aisha/gm"
+  input={`Aisha likes to code.
+Aisha also likes to play basketball`}
+/>
 
 You see now that "Aisha" that begins the first line is matched, and "Aisha" that begins the second line is matched.
 
 But if I have something before "Aisha" on the second line, it is not matched anymore:
 
-```txt
-<hi>Aisha</hi> likes to code.
-2. Aisha also likes to play basketball
-```
+<Regex
+  pattern="/^Aisha/gm"
+  input={`Aisha likes to code.
+2. Aisha also likes to play basketball`}
+/>
 
 The same thing applies to the `$` sign
 

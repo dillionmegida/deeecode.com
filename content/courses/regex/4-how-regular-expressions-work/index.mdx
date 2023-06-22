@@ -56,9 +56,10 @@ COD Call of Duty 😅
 
 The engine is like We're almost there…almost there. Next up in the pattern is “e”, so the engine checks if “e” comes after the “cod” it has found so far. Amazing! there's an “e”, so we have “code” so far, which is an exact match for the pattern. The engine has found the exact match, and so it stops searching, and returns that match:
 
-```txt
-She is coming to school to <hi>code</hi> but I could not come to code
-```
+<Regex
+  pattern="/code/"
+  input={`She is coming to school to code but I could not come to code`}
+/>
 
 But, there's another match for the code pattern (at the end of the string) and the engine only gets the first match.
 
@@ -70,7 +71,6 @@ By applying a “g” flag, here's what the regex engine does. So after it has f
 
 Now that we have changed the default behaviour, it continues searching for another potential match. It finds the “c” at position 38 (in "could"). It checks if it is followed by “o”. It is. So it checks if it is followed “d” and unfortunately it's not. Backtracks again.
 
-
 It finds a "c" at position 48 (in "come"). Does "o" come after it, yes. Does "d" come after the "o", no! Backtracks again.
 
 
@@ -78,9 +78,10 @@ If finds a "c" at position 56 (in "code"). Does "o" come after it, yes. Does "d"
 
 The engine also takes note of this substring. We have two matches so far:
 
-```txt
-She is coming to school to <hi>code</hi> but I could not come to <hi>code</hi>
-```
+<Regex
+  pattern="/code/g"
+  input={`She is coming to school to code but I could not come to code`}
+/>
 
 And now the engine comes to the end of the string. If the string had not stopped here, the engine would keep searching for more matches until the end of the string.
 
