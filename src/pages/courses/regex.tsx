@@ -71,7 +71,7 @@ const RegexCoursePage = ({ location, data }) => {
           </Bio>
           <Outline>
             <h2>Outline</h2>
-            <ol>
+            <ol start={0}>
               {courses.map(course => {
                 const {
                   frontmatter: { title },

@@ -69,12 +69,26 @@ const Container = styled.div`
     left: 0;
     display: flex;
 
+    .type,
+    button,
+    .invalid-text {
+      font-size: 12px;
+    }
+
+    .type {
+      padding: 10px;
+      background-color: #282a36;
+      border-top-left-radius: 10px;
+      border-bottom: 1px solid #131419;
+    }
+
     button {
       background-color: #131419;
       border: 1px solid #282a36;
+      border-left: none;
+      border-bottom: none;
       padding: 5px;
       font-size: 12px;
-      padding: 10px;
       width: 60px;
       text-align: center;
       color: white;
@@ -90,7 +104,6 @@ const Container = styled.div`
       display: block;
       background-color: #f43b3b;
       font-weight: 600;
-      font-size: 14px;
       color: white;
       padding: 0 10px;
       display: flex;
@@ -108,12 +121,40 @@ const Container = styled.div`
   }
 `
 
-export default function RegexBlock({ pattern, input }) {
+export default function RegexBlock({ pattern, input, type = "match" }) {
   const [editingString, setEditingString] = useState(false)
   const [patternInput, setPatternInput] = useState(pattern)
   const [stringInput, setStringInput] = useState(input)
-  const [invalidRegex, setInvalidRegex] = useState(false)
+  const [invalidRegex, setInvalidRegex] = useState("")
   const [modifiedString, setModifiedString] = useState("")
+
+  const validate = () => {
+    try {
+      const regexRegex = /\/(.*)\/(\w+)?/
+
+      const [, patternAsString, flags] = patternInput.match(regexRegex)
+
+      const regexPattern = new RegExp(`^${patternAsString}$`, flags)
+
+      const isValid = regexPattern.test(stringInput)
+
+      const newModifiedString = isValid
+        ? `<span class="match">${stringInput}</span>`
+        : `<span>${stringInput}</span>`
+
+      setModifiedString(newModifiedString)
+
+      setEditingString(false)
+      
+      if (!isValid)
+        return setInvalidRegex("The pattern does not match this string")
+
+      if (invalidRegex) setInvalidRegex("")
+
+    } catch (err) {
+      setInvalidRegex("The pattern does not match this string")
+    }
+  }
 
   const findMatches = () => {
     try {
@@ -140,20 +181,20 @@ export default function RegexBlock({ pattern, input }) {
               .replace(/\s/g, "&nbsp;")}</span>`
           }
         })
-
         .replace(/\n/g, "<br/>")
 
       setModifiedString(newModifiedString)
 
-      if (invalidRegex) setInvalidRegex(false)
+      if (invalidRegex) setInvalidRegex("")
       setEditingString(false)
     } catch (e) {
-      if (!invalidRegex) setInvalidRegex(true)
+      if (!invalidRegex) setInvalidRegex("Invalid Regex pattern")
     }
   }
 
   useEffect(() => {
-    findMatches()
+    if (type === "match") findMatches()
+    else validate()
   }, [])
 
   return (
@@ -189,17 +230,23 @@ export default function RegexBlock({ pattern, input }) {
         )}
       </div>
       <div className="block-top">
+        <span className="type">{type === "match" ? "Match" : "Validate"}</span>
         {editingString ? (
-          <button className="match-btn" onClick={findMatches}>
-            Match
+          <button
+            className="match-btn"
+            onClick={type === "match" ? findMatches : validate}
+          >
+            {type === "match" ? "Match" : "Validate"}
           </button>
         ) : (
           <button className="edit-btn" onClick={() => setEditingString(true)}>
             Edit
           </button>
         )}
-        {invalidRegex && (
-          <span className="invalid-text">Invalid Regex pattern</span>
+        {invalidRegex ? (
+          <span className="invalid-text">{invalidRegex}</span>
+        ) : (
+          <></>
         )}
       </div>
     </Container>

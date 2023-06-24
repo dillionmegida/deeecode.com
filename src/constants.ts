@@ -10,6 +10,7 @@ export const LINKS = {
         flags: "/courses/regex/flags",
         "how-regular-expressions-work":
           "/courses/regex/how-regular-expressions-work",
+        "character-class": "/courses/regex/character-class",
       },
     },
     javascript: {
