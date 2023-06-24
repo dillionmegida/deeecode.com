@@ -1,0 +1,80 @@
+---
+title: Negated Character Class in Regular Expressions
+date: "2023-06-16"
+description: "Learn about Negated Character Classes, and see how to use them to write advanced regular expressions"
+cover: negated-character-class-cover.png
+youtubeId: 9s-QGUWHEFc
+---
+
+As we saw in the previous lesson, a <CourseLink course='regex' path='character-class' label='character class' /> contains a set of characters for which the regular expression would match one of the characters in the class.
+
+But, we can also construct the regex to match characters that are not in the class. And this is where we use **Negated Character Classes**.
+
+## Negated Character Classes
+
+For example, let's say we want to match four letter words that end in "ing" but do not begin with "b", "g", "l", "n" or "t". That means our character class may look like this:
+
+Open square bracket, then a, we skip b, then, we have c, d, e, f, and we skip g. Or, we can replace this with a range of c to f (just before g), then a range of h to k (since k is before l), we skip l, then we add m, we also skip n, then, a range of o to s(since s is before t), then we skip t, then add a range of u to z
+
+```txt
+/``[``ac-fh-kmo-su-zing``]``ing/g
+```
+
+In the character class, we provided all other letters, and excluded "b", "g", "l", "n" and "t". Let's apply it to the string example from our previous lesson:
+
+<Regex
+    pattern="/[ac-fh-kmo-su-zing]ing/g"
+    input="He is a king, he likes to sing. He rings the bell. He pings the phone. He uses bing. Oh what a thing. He doesn't know the word ling"
+/>
+
+You notice that "bing", and "ling" aren't matched. That's because "b" and "l" are skipped from the character class.
+
+Though this works for what we want, it becomes hard to read. Looking at this, it becomes difficult to understand exactly what this pattern does.
+
+What we can introduce here to improve the regular expression is a negated character class.
+
+A negated character class matches characters **that are NOT** in the class.
+
+In our case here, we want to match four letter words that end in "ing" but do not begin with "b", "g", "l", "n" or "t". We can do this:
+
+```txt
+/``[^``bglnt``]``ing/g
+```
+
+
+We have the open square bracket, then we have a caret which means "negate". So this character class will become a negated character class. And we have the set of characters we do not want which are "b", "g", "l", "n" and "t". Then the close square bracket. Followed by ing.
+
+With the negated character class, this pattern will match four letter substrings that end in ing, but do not begin with "b", "g", "l", "n" or "t":
+
+<Regex
+    pattern="/[^bglnt]ing/g"
+    input="He is a king, he likes to sing. He rings the bell. He pings the phone. He uses bing. Oh what a thing. He doesn't know the word ling"
+/>
+
+You see here that every other letter followed by ing is matched except “bing” and “ling”, because "b" and "t" belong to the negated character class.
+
+So what the regex engine does here is that it searches the input string for the first character that is not “b”, “g”, “l”, “n” or “t”. When it finds that character, it then checks whether the character is followed by ing.
+
+Using the caret negates everything in the character class. So we can also negate ranges:
+
+```txt
+/``[^``a-m``]``ing/g
+```
+
+You can also negate numbers:
+
+```txt
+/``[^``0-5``]``-people/g
+```
+
+You can also negated mixed characters, for example:
+
+```txt
+/``[^``a-f123$``]``s/g
+```
+
+This negated character class means the regex pattern will match the part of a string that does not begin with a or hyphen, or f, or 1, or 2, or 3, or dollar sign and followed by s.
+
+So this will match "bs", "hs", "9s", but it will not match "as", "2s" or "$s".
+
+Remember, by starting the character class with a caret symbol, every character in it will be negated.

@@ -69,7 +69,7 @@ export default function CodeBlock({
                           dangerouslySetInnerHTML={{
                             __html: token.content
                               .replace(
-                                /``.*``/g,
+                                /``.*?``/g,
                                 match =>
                                   `<span class='inline-highlight'>${match.substring(2, match.length - 2)}</span>`
                               )

@@ -15,7 +15,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     const value = createFilePath({ node, getNode })
 
     if (value.startsWith("/regex") || value.startsWith("/javascript")) {
-      const filepathRegex = /^\/(\w+)\/(\d+)-([\w-]+)/
+      const filepathRegex = /^\/(\w+)\/([\d\.]+)-([\w-]+)/
 
       const [, courseLabel, courseOrder, coursePath] =
         value.match(filepathRegex)
