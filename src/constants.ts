@@ -12,6 +12,7 @@ export const LINKS = {
           "/courses/regex/how-regular-expressions-work",
         "character-class": "/courses/regex/character-class",
         "negated-character-class": "/courses/regex/negated-character-class",
+        quantifiers: "/courses/regex/quantifiers",
       },
     },
     javascript: {

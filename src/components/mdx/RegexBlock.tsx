@@ -78,7 +78,6 @@ const Container = styled.div`
     .type {
       padding: 10px;
       background-color: #282a36;
-      border-top-left-radius: 10px;
       border-bottom: 1px solid #131419;
     }
 
@@ -128,29 +127,32 @@ export default function RegexBlock({ pattern, input, type = "match" }) {
   const [invalidRegex, setInvalidRegex] = useState("")
   const [modifiedString, setModifiedString] = useState("")
 
+  const is_dev = process.env.NODE_ENV === "development"
+
   const validate = () => {
     try {
       const regexRegex = /\/(.*)\/(\w+)?/
 
-      const [, patternAsString, flags] = patternInput.match(regexRegex)
+      const [, patternAsString, flags] = (
+        is_dev ? pattern : patternInput
+      ).match(regexRegex)
 
       const regexPattern = new RegExp(`^${patternAsString}$`, flags)
 
-      const isValid = regexPattern.test(stringInput)
+      const isValid = regexPattern.test(is_dev ? input : stringInput)
 
       const newModifiedString = isValid
-        ? `<span class="match">${stringInput}</span>`
-        : `<span>${stringInput}</span>`
+        ? `<span class="match">${is_dev ? input : stringInput}</span>`
+        : `<span>${is_dev ? input : stringInput}</span>`
 
       setModifiedString(newModifiedString)
 
       setEditingString(false)
-      
+
       if (!isValid)
         return setInvalidRegex("The pattern does not match this string")
 
       if (invalidRegex) setInvalidRegex("")
-
     } catch (err) {
       setInvalidRegex("The pattern does not match this string")
     }
@@ -160,11 +162,13 @@ export default function RegexBlock({ pattern, input, type = "match" }) {
     try {
       const regexRegex = /\/(.*)\/(\w+)?/
 
-      const [, patternAsString, flags] = patternInput.match(regexRegex)
+      const [, patternAsString, flags] = (
+        is_dev ? pattern : patternInput
+      ).match(regexRegex)
 
       const regexPattern = new RegExp(patternAsString, flags)
 
-      const newModifiedString = stringInput
+      const newModifiedString = (is_dev ? input : stringInput)
         .replace(regexPattern, match => {
           if (match.includes("\n")) {
             return match.replace(
@@ -192,17 +196,22 @@ export default function RegexBlock({ pattern, input, type = "match" }) {
     }
   }
 
-  useEffect(() => {
-    if (type === "match") findMatches()
-    else validate()
-  }, [])
+  useEffect(
+    () => {
+      if (type === "match") findMatches()
+      else validate()
+    },
+    is_dev ? [input, pattern] : []
+  )
 
   return (
     <Container>
       <div className="pattern-block">
         <span className="pattern-block__label">Regex</span>
         {!editingString ? (
-          <span className="pattern-block__string">{patternInput}</span>
+          <span className="pattern-block__string">
+            {is_dev ? pattern : patternInput}
+          </span>
         ) : (
           <input
             className="pattern-block__input"

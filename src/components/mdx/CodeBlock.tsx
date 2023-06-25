@@ -25,7 +25,7 @@ const Multiline = styled.div`
     font-weight: 600;
     position: relative;
     background-color: #2c5c2c;
-    padding: 1px;
+    padding: 1px 0.2px;
     border-radius: 2px;
   }
 `
