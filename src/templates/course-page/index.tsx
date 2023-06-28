@@ -11,11 +11,33 @@ import CourseLink from "./course-link"
 import HeadingLink from "../../components/mdx/HeadingLink"
 import RegexBlock from "../../components/mdx/RegexBlock"
 import ImportantBlock from "../../components/mdx/ImportantBlock"
+import SideBar from "./sidebar"
 
 const Container = styled.div`
   --font-size: 19px;
   font-size: var(--font-size);
   color: #dfdbdb;
+
+  .content {
+    display: flex;
+
+    .side-bar {
+      max-width: 200px;
+      top: 0;
+      width: 100%;
+      margin-right: 40px;
+
+      @media (max-width: 800px) {
+        display: none;
+      }
+    }
+
+    .main-content {
+      width: 100%;
+      overflow-x: hidden;
+      padding-top: 3px;
+    }
+  }
 
   .inline-code {
     font-size: calc(var(--font-size) - 3px);
@@ -73,10 +95,11 @@ const Container = styled.div`
 
   .youtube-iframe {
     margin-bottom: 30px;
-
+    width: 100%;
+    
     iframe {
-      width: 100%;
-      min-height: 300px;
+        width: 100%;
+        min-height: 300px;
     }
   }
 `
@@ -105,7 +128,9 @@ export default function CoursePageTemplate({ location, data, children }) {
     fields: { orderId, slug },
   } = data.currentCourse
 
-  const { prevCourse, nextCourse } = data
+  console.log(data.allCourses)
+
+  const { prevCourse, nextCourse, allCourses } = data
 
   const courseTypeRegex = /(?<=\/courses\/)\w+/
 
@@ -118,11 +143,21 @@ export default function CoursePageTemplate({ location, data, children }) {
           <img src={`/courses/regex/${cover}`} alt={`${title} cover`} />
         </Cover> */}
         <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} />
-        <div className="container">
-          <span className="part-block">Part {orderId}</span>
-          <h1> {title}</h1>
-          <YouTube className="youtube-iframe" videoId={youtubeId} />
-          <MDXProvider components={components}>{children}</MDXProvider>
+        <div className="content container">
+          <div className="side-bar">
+            <SideBar
+              links={allCourses.nodes.map(({ frontmatter, fields }) => ({
+                label: frontmatter.title,
+                href: fields.slug,
+              }))}
+            />
+          </div>
+          <div className="main-content">
+            <span className="part-block">Part {orderId}</span>
+            <h1> {title}</h1>
+            <YouTube className="youtube-iframe" videoId={youtubeId} />
+            <MDXProvider components={components}>{children}</MDXProvider>
+          </div>
         </div>
         <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} />
       </Container>
@@ -167,6 +202,19 @@ export const pageQuery = graphql`
       }
       fields {
         slug
+      }
+    }
+    allCourses: allMdx(
+      sort: { fields: { orderId: ASC } }
+      filter: { fields: { slug: { regex: "//courses/regex/" } } }
+    ) {
+      nodes {
+        frontmatter {
+          title
+        }
+        fields {
+          slug
+        }
       }
     }
   }

@@ -39,7 +39,7 @@ const Wrapper = styled.div<{ theme: Theme }>`
 `
 
 const Container = styled.div`
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
 
@@ -61,7 +61,7 @@ const Layout = ({ location, children, theme = "regular" }: Props) => {
   }
 
   return (
-    <Wrapper className="global-wrapper" theme={themeObj}>
+    <Wrapper theme={themeObj}>
       <Container>
         <header className="global-header">
           <Nav pageType={theme} location={location} />

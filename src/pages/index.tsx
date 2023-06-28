@@ -5,7 +5,12 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import styled from "styled-components"
 
-const Container = styled.div``
+const Container = styled.div`
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+`
 
 const Cover = styled.div`
   width: 100%;
@@ -26,7 +31,7 @@ const Bio = styled.div`
 
 const IndexPage = ({ location }) => {
   return (
-    <Layout location={location} theme='regular'>
+    <Layout location={location} theme="regular">
       <Container>
         <Cover className="page-cover">
           <img src="/banner.png" alt="Deeecode cover" />
