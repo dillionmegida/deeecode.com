@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React  from "react"
 import styled from "styled-components"
+import useRegex from "./regex-hooks"
 
 const Container = styled.div`
   background-color: #282a36;
@@ -120,111 +121,47 @@ const Container = styled.div`
   }
 `
 
-export default function RegexBlock({ pattern, input, type = "match" }) {
-  const [editingString, setEditingString] = useState(false)
-  const [patternInput, setPatternInput] = useState(pattern)
-  const [stringInput, setStringInput] = useState(input)
-  const [invalidRegex, setInvalidRegex] = useState("")
-  const [modifiedString, setModifiedString] = useState("")
-
-  const is_dev = process.env.NODE_ENV === "development"
-
-  const validate = () => {
-    try {
-      const regexRegex = /\/(.*)\/(\w+)?/
-
-      const [, patternAsString, flags] = (
-        is_dev ? pattern : patternInput
-      ).match(regexRegex)
-
-      const regexPattern = new RegExp(`^${patternAsString}$`, flags)
-
-      const isValid = regexPattern.test(is_dev ? input : stringInput)
-
-      const newModifiedString = isValid
-        ? `<span class="match">${is_dev ? input : stringInput}</span>`
-        : `<span>${is_dev ? input : stringInput}</span>`
-
-      setModifiedString(newModifiedString)
-
-      setEditingString(false)
-
-      if (!isValid)
-        return setInvalidRegex("The pattern does not match this string")
-
-      if (invalidRegex) setInvalidRegex("")
-    } catch (err) {
-      setInvalidRegex("The pattern does not match this string")
-    }
-  }
-
-  const findMatches = () => {
-    try {
-      const regexRegex = /\/(.*)\/(\w+)?/
-
-      const [, patternAsString, flags] = (
-        is_dev ? pattern : patternInput
-      ).match(regexRegex)
-
-      const regexPattern = new RegExp(patternAsString, flags)
-
-      const newModifiedString = (is_dev ? input : stringInput)
-        .replace(regexPattern, match => {
-          if (match.includes("\n")) {
-            return match.replace(
-              /.+/g,
-              brokenMatch =>
-                `<span class="match">${brokenMatch.replace(
-                  /\s/g,
-                  "&nbsp;"
-                )}</span>`
-            )
-          } else {
-            return `<span class="match">${match
-              .replace(/\n/g, "<br/>")
-              .replace(/\s/g, "&nbsp;")}</span>`
-          }
-        })
-        .replace(/\n/g, "<br/>")
-
-      setModifiedString(newModifiedString)
-
-      if (invalidRegex) setInvalidRegex("")
-      setEditingString(false)
-    } catch (e) {
-      if (!invalidRegex) setInvalidRegex("Invalid Regex pattern")
-    }
-  }
-
-  useEffect(
-    () => {
-      if (type === "match") findMatches()
-      else validate()
-    },
-    is_dev ? [input, pattern] : []
-  )
+export default function RegexBlock({
+  pattern: _pattern,
+  input: _input,
+  type = "match",
+}) {
+  const {
+    editingMode,
+    modifiedString,
+    setPatternState,
+    setInputState,
+    input,
+    pattern,
+    findMatches,
+    validate,
+    setEditingMode,
+    invalidRegex,
+  } = useRegex({
+    input: _input,
+    pattern: _pattern,
+    type,
+  })
 
   return (
     <Container>
       <div className="pattern-block">
         <span className="pattern-block__label">Regex</span>
-        {!editingString ? (
-          <span className="pattern-block__string">
-            {is_dev ? pattern : patternInput}
-          </span>
+        {!editingMode ? (
+          <span className="pattern-block__string">{pattern}</span>
         ) : (
           <input
             className="pattern-block__input"
-            value={patternInput}
+            value={pattern}
             // onBlur={findMatches}
-            onChange={e => setPatternInput(e.target.value)}
+            onChange={e => setPatternState(e.target.value)}
           />
         )}
       </div>
       <div className="input-block">
         <span className="input-block__label">Input</span>
 
-        {!editingString ? (
+        {!editingMode ? (
           <span
             className="input-block__string"
             dangerouslySetInnerHTML={{ __html: modifiedString }}
@@ -232,15 +169,15 @@ export default function RegexBlock({ pattern, input, type = "match" }) {
         ) : (
           <textarea
             className="input-block__input"
-            value={stringInput}
+            value={input}
             // onBlur={findMatches}
-            onChange={e => setStringInput(e.target.value)}
+            onChange={e => setInputState(e.target.value)}
           />
         )}
       </div>
       <div className="block-top">
         <span className="type">{type === "match" ? "Match" : "Validate"}</span>
-        {editingString ? (
+        {editingMode ? (
           <button
             className="match-btn"
             onClick={type === "match" ? findMatches : validate}
@@ -248,7 +185,7 @@ export default function RegexBlock({ pattern, input, type = "match" }) {
             {type === "match" ? "Match" : "Validate"}
           </button>
         ) : (
-          <button className="edit-btn" onClick={() => setEditingString(true)}>
+          <button className="edit-btn" onClick={() => setEditingMode(true)}>
             Edit
           </button>
         )}

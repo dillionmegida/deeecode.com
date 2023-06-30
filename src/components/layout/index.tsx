@@ -45,6 +45,7 @@ const Container = styled.div`
 
   .main {
     padding-bottom: 50px;
+    min-height: 500px;
   }
 `
 
