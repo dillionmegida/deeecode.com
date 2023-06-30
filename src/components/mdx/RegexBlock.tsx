@@ -170,7 +170,7 @@ export default function RegexBlock({
     <Container>
       {type === "match" && locationState && (
         <Link
-          to={getUrlString(location, input, pattern)}
+          to={getUrlString(location, input, pattern, true)}
           className="expand-link"
         >
           Expand

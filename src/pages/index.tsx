@@ -18,6 +18,10 @@ const Cover = styled.div`
   img {
     width: 100%;
   }
+
+  &.container-md {
+    padding-top: 0;
+  }
 `
 
 const Bio = styled.div`
@@ -33,7 +37,7 @@ const IndexPage = ({ location }) => {
   return (
     <Layout location={location} theme="regular">
       <Container>
-        <Cover className="page-cover">
+        <Cover className="page-cover container-md">
           <img src="/banner.png" alt="Deeecode cover" />
         </Cover>
         <div className="container-md">
