@@ -12,13 +12,13 @@ const Container = styled.div`
   position: relative;
   color: white;
   width: 100%;
-  
+
   .pattern-block,
   .input-block {
-      padding: 15px;
-      display: flex;
-      width: 100%;
-      overflow-x: auto;
+    padding: 15px;
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
 
     &__label {
       font-size: 16px;
@@ -251,4 +251,6 @@ export default function Regex({ location }) {
   )
 }
 
-export const Head = () => <Seo title="Test your regular expressions" />
+export const Head = () => (
+  <Seo imageCard="/test-your-regex.png" title="Test your regular expressions" />
+)
