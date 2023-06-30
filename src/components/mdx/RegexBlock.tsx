@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import useRegex from "./regex-hooks"
 import { Link } from "gatsby"
@@ -160,9 +160,15 @@ export default function RegexBlock({
     type,
   })
 
+  const [locationState, setLocationState] = useState<null | Location>(null)
+
+  useEffect(() => {
+    if (location) setLocationState(location)
+  }, [])
+
   return (
     <Container>
-      {type === "match" && (
+      {type === "match" && locationState && (
         <Link
           to={getUrlString(location, input, pattern)}
           className="expand-link"
