@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import styled from "styled-components"
 import useRegex from "../components/mdx/regex-hooks"
 import Seo from "../components/seo"
+import { getUrlString } from "../components/mdx/regex-utils"
 
 const Container = styled.div`
   background-color: #282a36;
@@ -175,12 +176,9 @@ export default function Regex({ location }) {
     type,
   })
 
-  const encode = str => encodeURIComponent(str)
 
   const copyToClipboard = async () => {
-    const urlString = `${location.origin}/regex?input=${encode(
-      `"${input}"`
-    )}&pattern=${encode(`${pattern}`)}`
+    const urlString = getUrlString(location, input, pattern)
 
     await navigator.clipboard.writeText(urlString)
     alert("Copied to clipboard")
@@ -188,7 +186,9 @@ export default function Regex({ location }) {
 
   return (
     <Layout location={location} theme="regex">
-      <div className="container">
+      <div className="container-md">
+        <h1>Test your Regex 👇🏾</h1>
+        <br/>
         <Container>
           <div className="pattern-block">
             <span className="pattern-block__label">Regex</span>

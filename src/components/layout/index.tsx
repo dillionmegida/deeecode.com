@@ -5,6 +5,7 @@ import NewTabLink from "../new-tab-link"
 
 type Theme = {
   bg: string
+  headerBg: string
 }
 
 const Wrapper = styled.div<{ theme: Theme }>`
@@ -15,13 +16,21 @@ const Wrapper = styled.div<{ theme: Theme }>`
   padding-bottom: 50px;
   color: white;
 
-  @media (min-width: 800px) {
-    padding-top: var(--spacing-10);
-  }
-
   .container,
   footer {
-    padding: var(--spacing-5) var(--spacing-5);
+    /* padding: var(--spacing-5) 0; */
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  footer {
+    text-align: right;
+  }
+
+  .container-md {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-5);
   }
 
   a {
@@ -33,13 +42,15 @@ const Wrapper = styled.div<{ theme: Theme }>`
     }
   }
 
-  .global-header {
+  .header {
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    background-color: var(${({ theme }) => theme.headerBg});
   }
 `
 
 const Container = styled.div`
-  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
 
@@ -58,20 +69,21 @@ type Props = {
 const Layout = ({ location, children, theme = "regular" }: Props) => {
   const themeObj = {
     bg: `--color-${theme}-dark`,
+    headerBg: `--color-${theme}-dark-2`,
     link: `--color-${theme}-light`,
   }
 
   return (
     <Wrapper theme={themeObj}>
       <Container>
-        <header className="global-header">
+        <header className="header">
           <Nav pageType={theme} location={location} />
           {/* <Link className="header-link-home" to="/">
           <h1>{title}</h1>
         </Link> */}
         </header>
         <main className="main">{children}</main>
-        <footer>
+        <footer className="container-md">
           Managed by{" "}
           <NewTabLink href="https://twitter.com/iamdillion">Dillion</NewTabLink>{" "}
           &nbsp;&nbsp;|&nbsp;&nbsp; © {new Date().getFullYear()}

@@ -36,7 +36,7 @@ const IndexPage = ({ location }) => {
         <Cover className="page-cover">
           <img src="/banner.png" alt="Deeecode cover" />
         </Cover>
-        <div className="container">
+        <div className="container-md">
           <h1>Simplify the Web</h1>
           <Bio>
             <p>

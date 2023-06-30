@@ -27,6 +27,10 @@ const Cover = styled.div`
   img {
     width: 100%;
   }
+
+  &.container-md {
+    padding-top: 0;
+  }
 `
 
 const Bio = styled.div`
@@ -50,10 +54,10 @@ const RegexCoursePage = ({ location, data }) => {
   return (
     <Layout location={location} theme='regex'>
       <Container>
-        <Cover className="cover">
+        <Cover className="cover container-md">
           <img src={COURSE_COVER} alt="Regular Expressions Course cover" />
         </Cover>
-        <div className="container">
+        <div className="container-md">
           <h1>Regular Expressions Simplified Course</h1>
           <Bio>
             <p>

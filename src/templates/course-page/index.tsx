@@ -20,22 +20,31 @@ const Container = styled.div`
 
   .content {
     display: flex;
+    --side-bar-width: 200px;
 
     .side-bar {
-      max-width: 200px;
+      max-width: var(--side-bar-width);
+      position: fixed;
       top: 0;
+      height: 100svh;
       width: 100%;
       margin-right: 40px;
+    }
 
-      @media (max-width: 800px) {
+    @media (max-width: 800px) {
+      --side-bar-width: 0;
+
+      .side-bar {
         display: none;
       }
     }
 
     .main-content {
       width: 100%;
+      width: 100%;
       overflow-x: hidden;
-      padding-top: 3px;
+      margin-top: 43px;
+      margin-left: var(--side-bar-width);
     }
   }
 
@@ -96,10 +105,10 @@ const Container = styled.div`
   .youtube-iframe {
     margin-bottom: 30px;
     width: 100%;
-    
+
     iframe {
-        width: 100%;
-        min-height: 300px;
+      width: 100%;
+      min-height: 300px;
     }
   }
 `
@@ -128,8 +137,6 @@ export default function CoursePageTemplate({ location, data, children }) {
     fields: { orderId, slug },
   } = data.currentCourse
 
-  console.log(data.allCourses)
-
   const { prevCourse, nextCourse, allCourses } = data
 
   const courseTypeRegex = /(?<=\/courses\/)\w+/
@@ -142,8 +149,8 @@ export default function CoursePageTemplate({ location, data, children }) {
         {/* <Cover className="page-cover">
           <img src={`/courses/regex/${cover}`} alt={`${title} cover`} />
         </Cover> */}
-        <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} />
-        <div className="content container">
+
+        <div className="content">
           <div className="side-bar">
             <SideBar
               links={allCourses.nodes.map(({ frontmatter, fields }) => ({
@@ -153,13 +160,17 @@ export default function CoursePageTemplate({ location, data, children }) {
             />
           </div>
           <div className="main-content">
-            <span className="part-block">Part {orderId}</span>
-            <h1> {title}</h1>
-            <YouTube className="youtube-iframe" videoId={youtubeId} />
-            <MDXProvider components={components}>{children}</MDXProvider>
+            <div className="container-md">
+              {/* <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} /> */}
+              <span className="part-block">Part {orderId}</span>
+              <h1> {title}</h1>
+              <YouTube className="youtube-iframe" videoId={youtubeId} />
+              <MDXProvider components={components}>{children}</MDXProvider>
+            </div>
+
+            <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} />
           </div>
         </div>
-        <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} />
       </Container>
     </Layout>
   )

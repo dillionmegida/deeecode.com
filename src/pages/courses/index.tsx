@@ -63,7 +63,7 @@ const COURSES = [
 export default function Courses({ location }) {
   return (
     <Layout location={location}>
-      <Container className="container">
+      <Container className="container-md">
         <h1>Courses</h1>
         <p>
           Here are all the courses I've created to help you understand the web

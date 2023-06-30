@@ -1,6 +1,8 @@
-import React  from "react"
+import React from "react"
 import styled from "styled-components"
 import useRegex from "./regex-hooks"
+import { Link } from "gatsby"
+import { getUrlString } from "./regex-utils"
 
 const Container = styled.div`
   background-color: #282a36;
@@ -10,6 +12,21 @@ const Container = styled.div`
   position: relative;
   color: white;
   width: 100%;
+
+  .expand-link {
+    position: absolute;
+    right: 0;
+    background-color: #131419;
+    border: 1px solid #282a36;
+    border-left: none;
+    border-bottom: none;
+    padding: 10px;
+    font-size: 12px;
+    width: 60px;
+    text-align: center;
+    color: white;
+    top: -25px;
+  }
 
   .pattern-block,
   .input-block {
@@ -145,6 +162,14 @@ export default function RegexBlock({
 
   return (
     <Container>
+      {type === "match" && (
+        <Link
+          to={getUrlString(location, input, pattern)}
+          className="expand-link"
+        >
+          Expand
+        </Link>
+      )}
       <div className="pattern-block">
         <span className="pattern-block__label">Regex</span>
         {!editingMode ? (

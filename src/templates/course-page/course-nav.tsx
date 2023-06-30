@@ -3,7 +3,7 @@ import React from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
-  margin: 20px var(--spacing-5);
+  margin: 20px 0;
   font-size: 18px;
   display: flex;
   justify-content: space-between;
@@ -43,7 +43,7 @@ const Container = styled.div`
 
 export default function CourseNav({ prevCourse, nextCourse }) {
   return (
-    <Container className={`${prevCourse ? "" : "just-next"}`}>
+    <Container className={`container-md ${prevCourse ? "" : "just-next"}`}>
       {prevCourse && (
         <div className="prev">
           <Link to={prevCourse.fields.slug}>

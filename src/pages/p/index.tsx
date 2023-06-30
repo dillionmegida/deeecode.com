@@ -68,7 +68,7 @@ export default function Articles({ location, data }) {
 
   return (
     <Layout location={location}>
-      <Container className="container">
+      <Container className="container-md">
         <h1>Articles</h1>
 
         <div className="articles">

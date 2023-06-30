@@ -34,6 +34,10 @@ const Container = styled.div`
     &-cover {
       width: 100%;
 
+      &.container-md {
+        padding-top: 0;
+      }
+
       img {
         width: 100%;
       }
@@ -84,10 +88,12 @@ export default function BlogArticleTemplate({ location, data, children }) {
   return (
     <Layout location={location} theme={frontmatter.category}>
       <Container>
-        <div className="article-cover">
+        <div className="article-cover container-md">
           <img src={`/articles/${frontmatter.cover}`} />
         </div>
-        <div className={`container article article--${frontmatter.category}`}>
+        <div
+          className={`container-md article article--${frontmatter.category}`}
+        >
           <h1>{frontmatter.title}</h1>
           <MDXProvider components={components}>{children}</MDXProvider>
         </div>

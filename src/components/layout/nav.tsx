@@ -21,22 +21,33 @@ const NAV_LINKS = [
 
 const Block = styled.nav<{ pageType: string }>`
   background-color: var(--color-${({ pageType }) => pageType}-dark-2);
+  width: 100%;
 
-  ul,
-  li {
-    margin: 0;
+  .nav-list,
+  .nav {
     padding: 0;
     list-style-type: none;
   }
 
-  ul {
+  .nav-list {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 100%;
+
+    &.container-md {
+      padding: 0;
+    }
   }
 
-  li {
-    flex: 1;
-    width: 100%;
+  .rest {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .nav {
+    margin: 0;
+    /* flex: 1;
+    width: 100%; */
 
     a {
       color: white;
@@ -44,7 +55,7 @@ const Block = styled.nav<{ pageType: string }>`
       flex: 1;
       width: 100%;
       display: inline-block;
-      padding: 20px 15px;
+      padding: 20px;
       text-align: center;
 
       &.active-link,
@@ -70,15 +81,24 @@ export default function Nav({ location, pageType = "regular" }) {
 
   return (
     <Block pageType={pageType}>
-      <ul>
-        {NAV_LINKS.map(({ label, path }) => (
-          <li>
-            <Link activeClassName="active-link" to={path}>
-              {label}
+      <nav>
+        <ul className="nav-list container-md">
+          <li className="nav">
+            <Link activeClassName="active-link" to={NAV_LINKS[0].path}>
+              {NAV_LINKS[0].label}
             </Link>
           </li>
-        ))}
-      </ul>
+          <div className="rest">
+            {NAV_LINKS.slice(1).map(({ label, path }) => (
+              <li className="nav">
+                <Link activeClassName="active-link" to={path}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </div>
+        </ul>
+      </nav>
     </Block>
   )
 }

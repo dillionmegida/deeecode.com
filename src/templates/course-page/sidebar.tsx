@@ -3,12 +3,13 @@ import React from "react"
 import styled from "styled-components"
 
 const Aside = styled.div`
-  max-height: 600px;
   overflow-y: auto;
   --border-color: var(--color-regex-dark-2);
   border: 1px solid var(--border-color);
   width: 200px;
   font-size: 16px;
+  padding: 80px 0;
+  height: 100%;
 
   ol {
     /* padding: 0; */
@@ -26,7 +27,7 @@ const Aside = styled.div`
     a {
       line-height: 20px;
       display: block;
-      padding: 15px;
+      padding: 15px 20px;
       color: white;
       width: 100%;
       text-align: left;
