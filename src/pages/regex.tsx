@@ -123,6 +123,12 @@ const Container = styled.div`
     padding: 1px;
     border-radius: 2px;
   }
+
+  .newline {
+    /* padding: 0 50svw; */
+    background-color: #dca63c;
+    padding: 0 5px;
+  }
 `
 
 const CopyURL = styled.button`
@@ -144,16 +150,17 @@ export default function Regex({ location }) {
 
   const urlString = decodeURIComponent(search)
 
-  const urlParse = /input="(.*?)"&pattern=(.*)/
+  const urlParse = /input="(.*?)"&pattern=(.*)/s
   const parsed = urlString.match(urlParse)
 
-  let initialInput, initialPattern
+  let initialInput = "",
+    initialPattern = ""
 
   try {
-    if (!parsed) return
-
-    initialInput = parsed[1]
-    initialPattern = parsed[2]
+    if (parsed) {
+      initialInput = parsed[1]
+      initialPattern = parsed[2]
+    }
   } catch (err) {
     initialInput = ""
     initialPattern = ""
@@ -176,7 +183,6 @@ export default function Regex({ location }) {
     type,
   })
 
-
   const copyToClipboard = async () => {
     const urlString = getUrlString(location, input, pattern)
 
@@ -188,7 +194,7 @@ export default function Regex({ location }) {
     <Layout location={location} theme="regex">
       <div className="container-md">
         <h1>Test your Regex 👇🏾</h1>
-        <br/>
+        <br />
         <Container>
           <div className="pattern-block">
             <span className="pattern-block__label">Regex</span>

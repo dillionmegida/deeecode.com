@@ -7,11 +7,11 @@ export default function useRegex({ input, pattern, type = "match" }) {
   const [invalidRegex, setInvalidRegex] = useState("")
   const [editingMode, setEditingMode] = useState(input === "" || pattern === "")
 
-//   const is_dev = process.env.NODE_ENV !== "development"
+  //   const is_dev = process.env.NODE_ENV !== "development"
   const is_dev = false
 
   const findMatches = () => {
-    if (input === "" && pattern === "") return
+    if (inputState === "" && patternState === "") return
 
     try {
       const regexRegex = /\/(.*)\/(\w+)?/
@@ -24,6 +24,10 @@ export default function useRegex({ input, pattern, type = "match" }) {
 
       const newModifiedString = (is_dev ? input : inputState)
         .replace(regexPattern, match => {
+          if(match === '\n') {
+            return `<span class='match newline'></span><br/>`
+          }
+
           if (match.includes("\n")) {
             return match.replace(
               /.+/g,
@@ -120,15 +124,12 @@ export default function useRegex({ input, pattern, type = "match" }) {
   }
 }
 
-
-
-
 // /[A-Z]+\$/gi
 
-// Also @⁨💜⁩ I need your help here as I never too strong with regex 
+// Also @⁨💜⁩ I need your help here as I never too strong with regex
 // “type: textContent|5654$5812$7$ABCDEFGHIJK$"
 
-// So here what i need i want to get the ABCDEFGHIJK from this string 
+// So here what i need i want to get the ABCDEFGHIJK from this string
 // 😢
 
 // @⁨Isreal Odogwu⁩
