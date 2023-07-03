@@ -45,7 +45,7 @@ const Container = styled.div`
 
     &__string {
       border: 1px solid transparent;
-      line-height: 25px;
+      line-height: 30px;
       font-family: "Roboto Mono";
       font-size: 18px;
     }
@@ -56,7 +56,6 @@ const Container = styled.div`
       color: white;
       flex: 1;
       width: 100%;
-      /* min-width: 100%; */
       max-width: 100%;
     }
 
@@ -130,11 +129,27 @@ const Container = styled.div`
   }
 
   .match {
+    background-color: #2c5c2c;
+    /* padding: 0px 1px; */
+  }
+
+  .match,
+  .newline-end {
     font-weight: 600;
     position: relative;
-    background-color: #2c5c2c;
-    padding: 1px;
-    border-radius: 2px;
+  }
+
+  .newline-end,
+  .newline-start {
+    padding: 0 1px;
+    background-color: color-mix(in srgb, #ee7539 70%, white);
+  }
+
+  .newline-end {
+    padding: 0 3px;
+  }
+
+  .newline-start {
   }
 `
 

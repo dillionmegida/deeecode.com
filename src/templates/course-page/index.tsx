@@ -91,7 +91,7 @@ const Container = styled.div`
   ul {
     list-style: disc;
     padding-left: 20px;
-    line-height: 20px;
+    line-height: 25px;
   }
 
   h1 {

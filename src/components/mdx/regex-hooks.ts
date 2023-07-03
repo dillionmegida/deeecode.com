@@ -7,8 +7,8 @@ export default function useRegex({ input, pattern, type = "match" }) {
   const [invalidRegex, setInvalidRegex] = useState("")
   const [editingMode, setEditingMode] = useState(input === "" || pattern === "")
 
-  //   const is_dev = process.env.NODE_ENV !== "development"
-  const is_dev = false
+  const is_dev = process.env.NODE_ENV === "development"
+  //   const is_dev = false
 
   const findMatches = () => {
     if (inputState === "" && patternState === "") return
@@ -22,28 +22,35 @@ export default function useRegex({ input, pattern, type = "match" }) {
 
       const regexPattern = new RegExp(patternAsString, flags)
 
-      const newModifiedString = (is_dev ? input : inputState)
-        .replace(regexPattern, match => {
-          if(match === '\n') {
-            return `<span class='match newline'></span><br/>`
+      const newModifiedString = (is_dev ? input : inputState).replace(
+        regexPattern,
+        match => {
+
+            if (input.startsWith('What does that mean?')) {
+                console.log(`"${match}"`)
+            }
+           
+
+          if (match === "\n") {
+            return `<span class='newline-end'></span><br/><span class='newline-start'></span>`
           }
 
           if (match.includes("\n")) {
-            return match.replace(
-              /.+/g,
-              brokenMatch =>
-                `<span class="match">${brokenMatch.replace(
-                  /\s/g,
-                  "&nbsp;"
-                )}</span>`
-            )
+            return match.split(/\n/).reduce((a, b) => {
+              return `${
+                `<span class='match'>${a}</span>` +
+                "<span class='newline-end'></span><br/><span class='newline-start'></span>" +
+                `<span class='match'>${b}</span>`
+              }`
+            })
           } else {
             return `<span class="match">${match
               .replace(/\n/g, "<br/>")
               .replace(/\s/g, "&nbsp;")}</span>`
           }
-        })
-        .replace(/\n/g, "<br/>")
+        }
+      )
+      .replace(/\n/g, "<br/>")
 
       setModifiedString(newModifiedString)
 

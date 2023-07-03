@@ -32,7 +32,7 @@ const Container = styled.div`
 
     &__string {
       border: 1px solid transparent;
-      line-height: 25px;
+      line-height: 30px;
       font-family: "Roboto Mono";
       font-size: 18px;
     }
@@ -121,13 +121,18 @@ const Container = styled.div`
     position: relative;
     background-color: #2c5c2c;
     padding: 1px;
-    border-radius: 2px;
   }
 
-  .newline {
-    /* padding: 0 50svw; */
-    background-color: #dca63c;
-    padding: 0 5px;
+  .newline-end,
+  .newline-start {
+    background-color: color-mix(in srgb, #ee7539 70%, white);
+  }
+
+  .newline-end {
+    padding: 0 3px;
+  }
+
+  .newline-start {
   }
 `
 

@@ -46,6 +46,7 @@ const Wrapper = styled.div<{ theme: Theme }>`
     text-transform: uppercase;
     display: flex;
     align-items: center;
+    position: relative;
     background-color: var(${({ theme }) => theme.headerBg});
   }
 `

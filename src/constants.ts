@@ -13,6 +13,7 @@ export const LINKS = {
         "character-class": "/courses/regex/character-class",
         "negated-character-class": "/courses/regex/negated-character-class",
         quantifiers: "/courses/regex/quantifiers",
+        "meta-characters": "/courses/regex/meta-characters",
       },
     },
     javascript: {
