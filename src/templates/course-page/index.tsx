@@ -12,6 +12,7 @@ import HeadingLink from "../../components/mdx/HeadingLink"
 import RegexBlock from "../../components/mdx/RegexBlock"
 import ImportantBlock from "../../components/mdx/ImportantBlock"
 import SideBar from "./sidebar"
+import Share from "../../components/mdx/Share"
 
 const Container = styled.div`
   --font-size: 19px;
@@ -166,6 +167,10 @@ export default function CoursePageTemplate({ location, data, children }) {
               <h1> {title}</h1>
               <YouTube className="youtube-iframe" videoId={youtubeId} />
               <MDXProvider components={components}>{children}</MDXProvider>
+              <br />
+              <Share title={title} url={`https://deeecode.com${slug}`} />
+              <br />
+              <br />
             </div>
 
             <CourseNav prevCourse={prevCourse} nextCourse={nextCourse} />

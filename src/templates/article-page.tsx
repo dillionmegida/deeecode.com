@@ -75,7 +75,7 @@ const Container = styled.div`
 
 export default function BlogArticleTemplate({ location, data, children }) {
   const {
-    currentArticle: { frontmatter },
+    currentArticle: { frontmatter, fields },
   } = data
 
   const components = {
@@ -96,6 +96,10 @@ export default function BlogArticleTemplate({ location, data, children }) {
         >
           <h1>{frontmatter.title}</h1>
           <MDXProvider components={components}>{children}</MDXProvider>
+          <Share
+            title={frontmatter.title}
+            url={`https://deeecode.com${fields.slug}`}
+          />
         </div>
       </Container>
     </Layout>
