@@ -34,12 +34,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         value: courseOrder,
       })
     } else {
-      const articlePath = value.replace(/^(\/\d+-\s)/, "") // replace the number prefix
+      const articlePath = value.replace(/^\/\d+-/, "") // replace the number prefix
 
       createNodeField({
         name: `slug`,
         node,
-        value: `/p${articlePath.toLowerCase()}`,
+        value: `/p/${articlePath.toLowerCase()}`,
       })
     }
   }
