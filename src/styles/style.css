@@ -275,6 +275,10 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 .post-list-item {
   margin-bottom: var(--spacing-12);
   margin-top: var(--spacing-8);
@@ -333,14 +337,6 @@ button {
 .blog-post :is(p, ul) {
   font-size: var(--fontSize-2);
   line-height: 1.8;
-}
-
-.blog-post ul {
-  padding-left: 20px;
-}
-
-.blog-post-nav ul {
-  margin: var(--spacing-0);
 }
 
 .gatsby-highlight {

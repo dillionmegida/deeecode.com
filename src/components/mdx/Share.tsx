@@ -6,7 +6,7 @@ const Container = styled.div`
   .share-btn,
   .share-link {
     padding: 15px 25px;
-    border: 1px solid var(--color-regex-dark-2);
+    border: 1px solid var(--main-color);
     border-radius: 2px;
     color: white;
     transition: border-color 300ms;

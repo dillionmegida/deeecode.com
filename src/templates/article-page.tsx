@@ -7,8 +7,16 @@ import Share from "../components/mdx/Share"
 import CodeBlock from "../components/mdx/CodeBlock"
 import { MDXProvider } from "@mdx-js/react"
 import HeadingLink from "../components/mdx/HeadingLink"
+import QuestionBlock from "../components/mdx/QuestionBlock"
+import ImportantBlock from "../components/mdx/ImportantBlock"
 
 const Container = styled.div`
+  ul {
+    list-style: disc;
+    padding-left: 20px;
+    line-height: 20px;
+  }
+
   .article {
     --main-color: var(--color-regular-light);
     --font-size: 19px;
@@ -47,12 +55,6 @@ const Container = styled.div`
       color: var(--main-color);
     }
 
-    ul {
-      list-style: disc;
-      padding-left: 20px;
-      line-height: 20px;
-    }
-
     img {
       width: 100%;
       margin-bottom: 30px;
@@ -80,6 +82,8 @@ export default function BlogArticleTemplate({ location, data, children }) {
 
   const components = {
     Share,
+    Question: QuestionBlock,
+    Important: ImportantBlock,
     code: props => <CodeBlock category={frontmatter.category} {...props} />,
     h2: props => <HeadingLink Tag="h2" {...props} />,
     h3: props => <HeadingLink Tag="h3" {...props} />,

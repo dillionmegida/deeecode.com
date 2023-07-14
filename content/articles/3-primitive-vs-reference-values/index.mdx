@@ -1,0 +1,198 @@
+---
+title: "Primitive vs Reference Values in JavaScript"
+date: "2023-07-14"
+category: javascript
+description: "Primitive and Reference Values are fundamental concepts of JavaScript. Here's what they mean with examples."
+cover: 3-primitive-vs-reference.png
+---
+
+## Primitive Values
+
+In JavaScript, you have primitive values which are of the types `string`, `number`, `boolean`, `null`, `undefined`, `symbol`, and `BigInt`. These values are referred to as **atomic** or **static** values. For examples:
+
+```js
+let name = "Dillion"
+let age = 60
+let isRaining = true
+```
+
+Here we have three variables, each with primitive values:
+
+- `name` has "Dillion"
+- `age` has `60`
+- `isRaining` has `true`
+
+These values are static (fixed) which makes their size known during compile time. When JavaScript is storing such data in memory, it knows how much space is needed. Such static data are stored in the **stack memory** of a JavaScript engine. The process is called **static memory allocation**. In the stack, you have the variable name and the value it holds:
+
+![Static Memory Allocation](/articles/primitive-reference-values/static-memory-allocation.png)
+
+## Reference values
+
+In JavaScript, objects are referred to as reference values. This type of data can be likened to "a group of multiple values". Arrays, objects, and functions fall under the objects category. They are called reference values because the values are stored in the **heap memory**, and the respective "static" reference is stored on the **stack**. For example:
+
+```js
+const array = [1, 2, 3]
+const obj = {name: "Dillion"}
+function print() {
+    console.log("hello")
+}
+```
+
+In JavaScript's memory:
+
+![Heap Memory Allocation](/articles/primitive-reference-values/heap-memory-allocation.png)
+
+As you can see illustrated above, the object's data is stored "somewhere" in memory, and the address of its location is stored as a reference in the stack.
+
+Object values are stored in the heap memory because they are not fixed. JavaScript doesn't know how much memory such values would need because they are **dynamic**; dynamic in the sense that the data can change after initialization. For example, you can modify arrays or objects after the initial declaration:
+
+```js
+const array = [1, 2, 3]
+const obj = { name: "Dillion" }
+
+// later on
+
+array.push(5, 6)
+obj.age = 10
+```
+
+As you see here, the array can have extra values and the object can have extra properties (or modified properties) later on. Here's what it would look like in the JavaScript engine:
+
+
+Initially:
+![Initial heap allocation](/articles/primitive-reference-values/initial-heap-allocation.png)
+
+Later on:
+![Final heap allocation](/articles/primitive-reference-values/final-heap-allocation.png)
+
+<Important>
+    Notice that the references do not change. Only the data changes.
+</Important>
+
+## Modifying Object Values
+
+When you modify an object, you are not modifying the reference, but actually modifying the object's data. Here's what I mean.
+
+Take a look at this example:
+
+```js
+let name = "Dillion"
+let name2 = name
+```
+
+Here, we declared a variable called `name` and assigned it a value of "Dillion". Then we declared a variable called `name2` and assigned it `name`. What we have done here is **assign the value that `name` holds in memory to `name2`**. Now the stack would look like this:
+
+![Assigning Primitive Value Example](/articles/primitive-reference-values/assign-primitive-variable.png)
+
+If I should change `name2` to something else, it will not affect `name`:
+
+```js
+name2 = "Deeecode"
+
+console.log(name2)
+// Deeecode
+
+console.log(name)
+// Dillion
+```
+
+![Modifying Primitive Value Example](/articles/primitive-reference-values/modify-primitive-variable.png)
+
+Here, we changed the value of `name2` to "Deeecode", but as you can see in the logs, `name` still holds the value of "Dillion". Assigning `name` to `name2` as we saw previously `name2 = name`, does not mean that `name2` and `name` are the same thing. What we did was "assign the **value** of `name` to `name2`". They remain different variables.
+
+But in the case of reference values, things are a bit different.
+
+We saw earlier that reference values are stored in the heap, and the reference is stored in the stack. Let's say we assign one array variable to another. For example:
+
+```js
+let array = [1, 2, 3]
+let array2 = array
+```
+
+What do you think happens here?
+
+Perhaps you think `[1, 2, 3]` in `array` is assigned to `array2`. No!
+
+<Important>
+Remember, the value that `array` holds in the stack (since it is of the object category) is a **reference** and not the object data. So what happens here is that the reference that  `array` holds will be assigned to `array2` like this:
+</Important>
+
+![Assigning Reference Variable](/articles/primitive-reference-values/assign-reference-variable.png)
+
+So, `array` and `array2` are now holding the same reference. Let's say you modify `array2`:
+
+```js
+array2.push(4)
+
+console.log(array2)
+// [1, 2, 3, 4]
+```
+
+What do you think happens to `array`?
+
+<Important>
+Remember again I said that, "when you modify an object, you are modifying the object's data and not the reference". In this case, it means `array2` will modify the data stored in the reference it holds:
+</Important>
+
+![Modifying Reference Variable](/articles/primitive-reference-values/modify-reference-variable.png)
+
+Since `array` has the same reference, it would have the updated object's data:
+
+```js
+console.log(array2)
+// [1, 2, 3, 4]
+
+console.log(array)
+// [1, 2, 3, 4]
+```
+
+`array` and `array2` point to the same address in memory, so when you modify `array`, `array2` will be affected and when you modify `array2`, `array` would be affected.
+
+## Comparing Primitive and Reference Values
+
+Another thing to look at with primitive and reference values is comparisons. Comparison behaviors differ between both of them.
+
+For example:
+
+```js
+const array = [1, 2, 3]
+const array2 = [1, 2, 3]
+
+const isEqual = array === array2
+
+console.log(isEqual)
+// false
+```
+
+Can you guess:
+
+<Question
+question="Why is <code>array</code> not equal to <code>array2</code> even when they hold the data <code>[1, 2, 3]</code>?"
+  answers={[
+   "'array' is spelt differently from 'array2'", "the strict equality === does not work with object values", "they hold different memory references in the stack" 
+  ]}
+  answer={3}
+/>
+
+If you selected the third option: "they hold different memory references in the stack", you are correct. Here's why.
+
+For the code example:
+
+```js
+const array = [1, 2, 3]
+const array2 = [1, 2, 3]
+```
+
+Here's what happens on the stack and heap:
+
+![Comparing Reference Values](/articles/primitive-reference-values/compare-reference-values.png)
+
+As you can see, even though both values are the same, they are stored in different memory locations in the **heap**. Remember that object values are dynamic, which means `array` can be modified later, and `array2` may not be modified. So JavaScript cannot put both values in the same location.
+
+The references in the heap are then assigned to the variable names in the stack. So when you do `array === array2`, you're actually not comparing `[1, 2, 3]` and `[1, 2, 3]`. What you're actually comparing is the references, which in the diagram above are `ref#xyz` and `ref#abc` (for example purposes).
+
+## Wrap Up
+
+Primitive and Reference values are one of the fundamental concepts of JavaScript. Understanding this would save you a lot of problems and would deepen your knowledge of JavaScript.
+
+I hope you found this helpful, if so, please:
