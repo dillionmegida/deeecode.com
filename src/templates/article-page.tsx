@@ -9,6 +9,7 @@ import { MDXProvider } from "@mdx-js/react"
 import HeadingLink from "../components/mdx/HeadingLink"
 import QuestionBlock from "../components/mdx/QuestionBlock"
 import ImportantBlock from "../components/mdx/ImportantBlock"
+import CodePreview from "../components/mdx/CodePreview"
 
 const Container = styled.div`
   ul {
@@ -84,6 +85,7 @@ export default function BlogArticleTemplate({ location, data, children }) {
     Share,
     Question: QuestionBlock,
     Important: ImportantBlock,
+    CodePreview,
     code: props => <CodeBlock category={frontmatter.category} {...props} />,
     h2: props => <HeadingLink Tag="h2" {...props} />,
     h3: props => <HeadingLink Tag="h3" {...props} />,

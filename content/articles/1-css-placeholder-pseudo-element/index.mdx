@@ -1,7 +1,7 @@
 ---
-title: CSS ::placeholder pseudo element
-date: "2023-06-05"
-description: "Testing out stuff"
+title: "CSS ::placeholder pseudo element"
+date: "2023-07-15"
+description: "Here's how this pseudo element allows you to style the placeholder part of an input element"
 cover: 1-css-placeholder-pseudo-element.png
 category: css
 ---
@@ -11,3 +11,43 @@ You can style input elements in different ways. You can style the border of the 
 In this article, we'll be exploring how to style the placeholder part of an input.
 
 ## `::placeholder`
+
+This pseudo element allows you to apply specific styles to the placeholder of an input.
+
+Test this pseudo element by selecting the code blocks below:
+
+<CodePreview
+  stylesArray={[
+    {
+      id: 1,
+      code: `
+input::placeholder {
+  color: initial;
+}
+        `,
+      others: `
+    <input placeholder="Enter name" class='hide input-for-pseudo' />
+    `,
+      type: "css",
+    },
+    {
+      id: 2,
+      code: `
+input::placeholder {
+  color: red;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+        `,
+      others: `
+    <input placeholder="Enter name" class='hide input-for-pseudo' />
+    `,
+      type: "css",
+    },
+  ]}
+/>
+
+<br />
+
+The styles you can apply to this element is limited however. You can apply font-related properties,
+background-related properties, the `color` property and a few others. You cannot, for example, appy the `margin` or `padding` for the placeholder.

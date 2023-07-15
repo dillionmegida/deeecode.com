@@ -10,12 +10,11 @@ const Inline = styled.span<{ theme }>`
 `
 
 const Multiline = styled.div`
-  margin-bottom: 20px;
   font-family: "Roboto Mono";
   width: 100%;
 
   .block {
-    padding: 25px 40px 0 20px;
+    padding: 25px 40px 25px 20px;
     border-radius: 5px;
     width: 100%;
     overflow-x: auto;
