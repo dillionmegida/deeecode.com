@@ -15,9 +15,7 @@ const GitCoursePage = ({ location, data }) => {
         title: "Git Simplified for Beginners Course",
         cover: COURSE_COVER,
         text: `<p>
-        Here's a course I'm working on--JavaScript for Beginners. In this
-        course, I will teach you all you need to know about JavaScript
-        from the ground to the top.
+        I'm currently working 
         <br />
         <br />
         When published, the video version will be live on my

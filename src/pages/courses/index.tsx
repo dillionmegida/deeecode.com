@@ -58,12 +58,12 @@ const COURSES = [
     cover: "/javascript/js-course-cover.png",
     linkClass: "--color-javascript",
   },
-  {
-    label: "Git Simplified for Beginners",
-    path: LINKS.courses.git.path,
-    cover: "/git/git-course-cover.png",
-    linkClass: "--color-git",
-  },
+//   {
+//     label: "Git Simplified for Beginners",
+//     path: LINKS.courses.git.path,
+//     cover: "/git/git-course-cover.png",
+//     linkClass: "--color-git",
+//   },
 ]
 
 export default function Courses({ location }) {
