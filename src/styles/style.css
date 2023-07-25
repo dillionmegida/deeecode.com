@@ -84,6 +84,12 @@
   --color-css-dark: var(--color-regular-dark);
   --color-css-dark-2: var(--color-regular-dark-2);
   --color-css-dark-3: var(--color-regular-dark-3);
+
+  --color-git: #F05033;
+  --color-git-light: #f7674e;
+  --color-git-dark: #1c0805;
+  --color-git-dark-2: #270b07;
+  --color-git-dark-3: #50180f;
 }
 
 /* HTML elements */

@@ -4,15 +4,15 @@ import Seo from "../../components/seo"
 import { LINKS } from "../../constants"
 import CourseMainPage from "../../templates/course-main-page"
 
-const COURSE_COVER = "/courses/js-course-cover.png"
+const COURSE_COVER = "/courses/git-course-cover.png"
 
-const JavaScriptCoursePage = ({ location, data }) => {
+const GitCoursePage = ({ location, data }) => {
   return (
     <CourseMainPage
       location={location}
       course={{
-        type: "javascript",
-        title: "JavaScript Simplified for Beginners Course",
+        type: "git",
+        title: "Git Simplified for Beginners Course",
         cover: COURSE_COVER,
         text: `<p>
         Here's a course I'm working on--JavaScript for Beginners. In this
@@ -29,7 +29,7 @@ const JavaScriptCoursePage = ({ location, data }) => {
   )
 }
 
-export default JavaScriptCoursePage
+export default GitCoursePage
 
 export const Head = () => (
   <Seo

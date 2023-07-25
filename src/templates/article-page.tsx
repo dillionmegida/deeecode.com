@@ -129,7 +129,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         cover
         category
-        youtubeId
+        # youtubeId
       }
       fields {
         slug

@@ -19,6 +19,9 @@ export const LINKS = {
     javascript: {
       path: "/courses/javascript",
     },
+    git: {
+      path: "/courses/git",
+    },
   },
 
   articles: "/p",
