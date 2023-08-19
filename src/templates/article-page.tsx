@@ -10,6 +10,7 @@ import HeadingLink from "../components/mdx/HeadingLink"
 import QuestionBlock from "../components/mdx/QuestionBlock"
 import ImportantBlock from "../components/mdx/ImportantBlock"
 import CodePreview from "../components/mdx/CodePreview"
+import NewTabLink from "../components/new-tab-link"
 
 const Container = styled.div`
   ul {
@@ -101,6 +102,9 @@ export default function BlogArticleTemplate({ location, data, children }) {
           className={`container-md article article--${frontmatter.category}`}
         >
           <h1>{frontmatter.title}</h1>
+          {frontmatter.video && (
+            <p>I also have a <NewTabLink href={frontmatter.video}>video version of this topic</NewTabLink> you can check out! </p>
+          )}
           <MDXProvider components={components}>{children}</MDXProvider>
           <Share
             title={frontmatter.title}
@@ -129,7 +133,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         cover
         category
-        # youtubeId
+        video
       }
       fields {
         slug
