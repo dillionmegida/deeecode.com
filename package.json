@@ -1,6 +1,5 @@
 {
   "name": "deeecode",
-  "private": true,
   "description": "Website for Deeecode",
   "version": "0.1.0",
   "author": "Dillion Megida <dillion.megida@gmail.com>",
@@ -49,9 +48,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/dillionmegida/deeecode.com"
   }
 }
