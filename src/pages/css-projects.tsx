@@ -4,6 +4,7 @@ import styled from "styled-components"
 import Seo from "../components/seo"
 import Layout from "../components/layout"
 import NewTabLink from "../components/new-tab-link"
+import LinkIcon from "../components/Icon/Link"
 
 const Container = styled.div<{ theme: any }>`
   .codepen {
@@ -15,8 +16,7 @@ const Container = styled.div<{ theme: any }>`
       align-items: center;
       background-color: #eceaea;
 
-      .codepen-title,
-      .video-link {
+      .codepen-title {
         padding: 5px 10px;
       }
 
@@ -28,13 +28,15 @@ const Container = styled.div<{ theme: any }>`
       }
 
       .video-link a {
-        display: block;
-        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         font-size: 15px;
-        padding: 3px 6px;
+        padding: 10px 20px;
         background-color: black;
         color: white;
         text-decoration: none;
+        border: 2px solid white;
 
         &:hover {
           color: yellow;
@@ -54,7 +56,23 @@ const PROJECTS = [
     title: "Apple Dock Animation",
     video: "https://youtu.be/AERByfmKMok",
   },
-  { id: "gOZrQga", title: "Input Error Shake", video: "" },
+  {
+    id: "mdaEryr",
+    title: "Question Flip Flashcard",
+  },
+  {
+    id: "GRPpdod",
+    title: "Animated Switcher/Toggler",
+    video: "https://youtu.be/nDJMpHByUZE"
+  },
+  {
+    id: "vYvKgMN",
+    title: "Image Zoom Animation",
+  },
+  {
+    id: "gOZrQga",
+    title: "Input Error Shake",
+  },
   { id: "yLGORPJ", title: "Label Input Animations", video: "" },
 ]
 
@@ -67,14 +85,16 @@ function CodepenEmbed() {
             <h2 className="codepen-title">{p.title}</h2>
             {p.video && (
               <span className="video-link">
-                <NewTabLink href={p.video}>Tutorial</NewTabLink>
+                <NewTabLink href={p.video}>
+                  <LinkIcon color='white' /> Tutorial
+                </NewTabLink>
               </span>
             )}
           </div>
           <iframe
-            height="300"
+            height="450"
             scrolling="no"
-            src={`https://codepen.io/Dillion/embed/preview/${p.id}?default-tab=result&editable=true`}
+            src={`https://codepen.io/Dillion/embed/${p.id}?default-tab=result&editable=true`}
             frameBorder="no"
             loading="lazy"
             allowTransparency={true}
