@@ -9,6 +9,7 @@ import LinkIcon from "../components/Icon/Link"
 const Container = styled.div<{ theme: any }>`
   .codepen {
     margin-bottom: 30px;
+    padding: 20px 0;
 
     .info-block {
       display: flex;
@@ -63,7 +64,7 @@ const PROJECTS = [
   {
     id: "GRPpdod",
     title: "Animated Switcher/Toggler",
-    video: "https://youtu.be/nDJMpHByUZE"
+    video: "https://youtu.be/nDJMpHByUZE",
   },
   {
     id: "vYvKgMN",
@@ -80,13 +81,13 @@ function CodepenEmbed() {
   return (
     <>
       {PROJECTS.map(p => (
-        <div className="codepen">
+        <div id={`codepen-${p.id}`} className="codepen">
           <div className="info-block">
             <h2 className="codepen-title">{p.title}</h2>
             {p.video && (
               <span className="video-link">
                 <NewTabLink href={p.video}>
-                  <LinkIcon color='white' /> Tutorial
+                  <LinkIcon color="white" /> Tutorial
                 </NewTabLink>
               </span>
             )}

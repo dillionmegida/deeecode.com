@@ -14,6 +14,7 @@ module.exports = {
       twitter: `iamdillion`,
     },
   },
+  trailingSlash: 'never',
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-styled-components`,
