@@ -69,12 +69,17 @@ const PROJECTS = [
   {
     id: "vYvKgMN",
     title: "Image Zoom Animation",
+    video: "https://www.tiktok.com/@iamdillion/video/7274274594209434886"
   },
   {
     id: "gOZrQga",
     title: "Input Error Shake",
   },
-  { id: "yLGORPJ", title: "Label Input Animations", video: "" },
+  { id: "yLGORPJ", title: "Label Input Animations", video: "https://www.tiktok.com/@iamdillion/video/7273507094643461382" },
+  { id: "wvRojMW", title: "Loading Circle Animation", video: "https://www.tiktok.com/@iamdillion/video/7275760017997892870" },
+  { id: "xxmgZRa", title: "CSS Filter Samples", video: "" },
+  { id: "yLGgpeM", title: "Image With Text Animation", video: "" },
+  { id: "wvRgpOJ", title: "Submit Button Check Animation", video: "" },
 ]
 
 function CodepenEmbed() {
