@@ -51,7 +51,7 @@ const Container = styled.div<{ theme: any }>`
   }
 `
 
-const PROJECTS = [
+const DEMOS = [
   {
     id: "GRwaNVK",
     title: "Apple Dock Animation",
@@ -85,7 +85,7 @@ const PROJECTS = [
 function CodepenEmbed() {
   return (
     <>
-      {PROJECTS.map(p => (
+      {DEMOS.map(p => (
         <div id={`codepen-${p.id}`} className="codepen">
           <div className="info-block">
             <h2 className="codepen-title">{p.title}</h2>
@@ -113,13 +113,13 @@ function CodepenEmbed() {
   )
 }
 
-export default function CSSProjects({ location }) {
+export default function CSSDemos({ location }) {
   return (
     <Layout location={location}>
       <Container className="container-md">
-        <h1>Mini CSS Projects</h1>
+        <h1>CSS Demos</h1>
         <p>
-          Here are some fun projects, which includes different CSS Tips you can
+          Here are some fun demos, which includes different CSS Tips you can
           apply in your code.
           <br />
           You can also watch the "Tutorial" videos.
@@ -131,5 +131,5 @@ export default function CSSProjects({ location }) {
 }
 
 export const Head = () => (
-  <Seo imageCard="/css-projects-cover.png" title="Fun Mini CSS Projects" />
+  <Seo imageCard="/css-demos-cover.png" title="Fun CSS Demos" />
 )

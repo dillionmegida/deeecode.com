@@ -48,13 +48,13 @@ const CourseBlock = styled.li<{ linkClass }>`
 const COURSES = [
   {
     label: "Regular Expressions Simplified",
-    path: LINKS.courses.regex.path,
+    path: LINKS.regexCourse,
     cover: "/regex-course-cover.png",
     linkClass: "--color-regex",
   },
   {
     label: "JavaScript Simplified for Beginners",
-    path: LINKS.courses.javascript.path,
+    path: LINKS.jsCourse,
     cover: "/js-course-cover.png",
     linkClass: "--color-javascript",
   },

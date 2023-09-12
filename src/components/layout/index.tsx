@@ -2,6 +2,8 @@ import * as React from "react"
 import styled from "styled-components"
 import Nav from "./nav"
 import NewTabLink from "../new-tab-link"
+import AnchorLink from "../anchor-link"
+import { LINKS } from "../../constants"
 
 type Theme = {
   bg: string
@@ -25,21 +27,19 @@ const Wrapper = styled.div<{ theme: Theme }>`
 
   footer {
     text-align: right;
+
+    a {
+      color: var(${({ theme }) => theme.link});
+      padding: 5px 10px;
+      top: 4px;
+      font-weight: 800;
+    }
   }
 
   .container-md {
     max-width: 800px;
     margin: 0 auto;
     padding: var(--spacing-5);
-  }
-
-  a {
-    color: var(${({ theme }) => theme.link});
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   .header {
@@ -86,7 +86,9 @@ const Layout = ({ location, children, theme = "regular" }: Props) => {
         <main className="main">{children}</main>
         <footer className="container-md">
           Managed by{" "}
-          <NewTabLink href="https://twitter.com/iamdillion">Dillion</NewTabLink>{" "}
+          <AnchorLink newTab link={LINKS.twitter}>
+            @iamdillion
+          </AnchorLink>
           &nbsp;&nbsp;|&nbsp;&nbsp; © {new Date().getFullYear()}
         </footer>
       </Container>

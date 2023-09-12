@@ -11,7 +11,7 @@ const NAV_LINKS = [
   },
   {
     label: "Courses",
-    path: LINKS.courses.path,
+    path: LINKS.courses,
   },
   {
     label: "Articles",
@@ -63,10 +63,7 @@ const Block = styled.nav<{ pageType: string }>`
         background-color: var(--color-${({ pageType }) => pageType}-dark-3);
         transition: background-color 300ms;
         text-decoration: none;
-
-        &:not(:hover) {
-          font-weight: 800;
-        }
+        font-weight: 800;
       }
     }
   }

@@ -46,7 +46,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage, createRedirect } = actions
 
-  createRedirect({ fromPath: '/old-url', toPath: '/new-url', isPermanent: true });
+  createRedirect({ fromPath: '/css-projects', toPath: '/css-demos', isPermanent: true });
 
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
