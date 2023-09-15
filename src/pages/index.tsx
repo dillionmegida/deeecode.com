@@ -23,11 +23,15 @@ const Container = styled.div`
     --default-color: var(--color-regular);
   }
 
-  .links {
+  .links,
+  .social-links {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+  }
+
+  .links {
     margin: 40px 0;
 
     a {
@@ -39,13 +43,14 @@ const Container = styled.div`
       --default-color: yellow;
     }
   }
-`
 
-const Cover = styled.div`
-  width: 100%;
-
-  img {
-    width: 100%;
+  .social-links {
+    margin: 100px 0;
+    p {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
   }
 `
 
@@ -68,13 +73,30 @@ const IndexPage = ({ location }) => {
               newTab
               link={LINKS.youtube}
             >
-              @deeecode
+              deeecode
             </AnchorLink>
             <AnchorLink iconSize={25} link={LINKS.cssDemos}>
               ✨ CSS Demos
             </AnchorLink>
             <AnchorLink iconSize={25} link={LINKS.regexCourse}>
               🧑🏽‍💻 Regex Course
+            </AnchorLink>
+          </div>
+          <div className="social-links">
+            <p>You can also find me on</p>
+            <AnchorLink
+              iconSize={15}
+              className="yt-link"
+              newTab
+              link={LINKS.tiktok}
+            >
+              iamdillion
+            </AnchorLink>
+            <AnchorLink newTab iconSize={15} link={LINKS.instagram}>
+              deeecode
+            </AnchorLink>
+            <AnchorLink newTab iconSize={15} link={LINKS.twitter}>
+              iamdillion
             </AnchorLink>
           </div>
           <Bio>

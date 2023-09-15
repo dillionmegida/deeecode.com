@@ -6,7 +6,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 40vh;
+  padding-bottom: 50px;
+  min-height: 50vh;
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -49,12 +50,42 @@ const Container = styled.div`
   h1 {
     font-size: 60px;
     font-weight: 800;
-    font-family: Poppins;
+    font-family: Raleway;
     text-align: center;
+    margin: 20px;
+
+    .simplify-text {
+      color: yellow;
+      position: relative;
+
+      &::after,
+      &::before {
+        content: "✨";
+        position: absolute;
+        font-size: 20px;
+    }
+    
+    &::before {
+        left: 0px;
+        top: -5px;
+    }
+    
+    &::after {
+          top: -10px;
+        right: 0px;
+      }
+    }
 
     @media (max-width: 600px) {
       font-size: 40px;
     }
+  }
+
+  .short-text {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin: 20px auto 50px;
   }
 
   .languages {
@@ -130,7 +161,13 @@ export default function HomeLanding() {
   return (
     <Container>
       <div className="page-cover container">
-        <h1>Simplify the Web</h1>
+        <h1>
+          <span className="simplify-text">Simplify</span> the Web
+        </h1>
+        <p className="short-text">
+          My goal is to break down topics, languages and concepts related to the
+          web in the simplest way possible, through articles and videos 😄
+        </p>
         <div className="languages">
           {LANGUAGES.map(l => {
             return <img src={l.image} alt={l.name} />

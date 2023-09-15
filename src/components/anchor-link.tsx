@@ -2,6 +2,8 @@ import React, { ReactNode } from "react"
 import Link from "./Icon/Link"
 import YouTube from "./Icon/YouTube"
 import Twitter from "./Icon/Twitter"
+import TikTok from "./Icon/TikTok"
+import Instagram from "./Icon/Instagram"
 import styled from "styled-components"
 
 const LinkStyle = styled.a`
@@ -26,7 +28,7 @@ const LinkStyle = styled.a`
   }
 `
 
-type Icon = "youtube" | "link" | "twitter"
+type Icon = "youtube" | "link" | "twitter" | "tiktok" | "instagram"
 
 type Props = {
   link: string
@@ -36,8 +38,6 @@ type Props = {
   iconSize?: number
   newTab?: boolean
 }
-
-
 
 export function NewTabLink({
   link,
@@ -78,35 +78,46 @@ export function NewTabLink({
 //   )
 // }
 
-
 export default function AnchorLink({
   link,
   children,
   className,
   newTab = false,
-  iconSize = 20
+  iconSize = 20,
 }: Props) {
+  const iconMap: { [x in Icon]: ReactNode } = {
+    link: <Link size={iconSize} />,
+    youtube: <YouTube size={iconSize} />,
+    twitter: <Twitter size={iconSize} />,
+    tiktok: <TikTok size={iconSize} />,
+    instagram: <Instagram size={iconSize} />,
+  }
 
-    const iconMap: { [x in Icon]: ReactNode } = {
-        link: <Link size={iconSize} />,
-        youtube: <YouTube size={iconSize} />,
-        twitter: <Twitter size={iconSize} />,
-      }
-
-
-function getLinkIcon(link: string) {
+  function getLinkIcon(link: string) {
     if (
       link.startsWith("https://youtube") ||
       link.startsWith("https://www.youtube")
     )
       return iconMap["youtube"]
-  
+
     if (
       link.startsWith("https://twitter") ||
       link.startsWith("https://www.twitter")
     )
       return iconMap["twitter"]
-  
+
+    if (
+      link.startsWith("https://tiktok") ||
+      link.startsWith("https://www.tiktok")
+    )
+      return iconMap["tiktok"]
+
+    if (
+      link.startsWith("https://instagram") ||
+      link.startsWith("https://www.instagram")
+    )
+      return iconMap["instagram"]
+
     return null
   }
 

@@ -24,4 +24,6 @@ export const LINKS = {
 
   twitter: "https://twitter.com/iamdillion",
   youtube: "https://youtube.com/@deeecode",
+  tiktok: "https://tiktok.com/@iamdillion",
+  instagram: "https://instagram.com/deeecode",
 }
