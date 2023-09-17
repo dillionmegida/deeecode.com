@@ -70,7 +70,12 @@ const DEMOS = [
   },
   {
     id: "mdaEryr",
-    title: "Question Flip Flashcard",
+    title: "Flipcard 3d Animation",
+    video: "https://youtu.be/p2vG4KSRKJc"
+  },
+  {
+    id: "VwqzqOX",
+    title: "Fancy Navbar Animation",
   },
   {
     id: "GRPpdod",
