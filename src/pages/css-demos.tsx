@@ -92,6 +92,10 @@ const DEMOS = [
     title: "Input Error Shake",
   },
   {
+    id: "zYyEJwY",
+    title: "3D Navbar Animation",
+  },
+  {
     id: "yLGORPJ",
     title: "Label Input Animations",
     video: "https://www.tiktok.com/@iamdillion/video/7273507094643461382",
