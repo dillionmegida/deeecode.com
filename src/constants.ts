@@ -26,4 +26,11 @@ export const LINKS = {
   youtube: "https://youtube.com/@deeecode",
   tiktok: "https://tiktok.com/@iamdillion",
   instagram: "https://instagram.com/deeecode",
+  buymeacoffee: "https://www.buymeacoffee.com/dillion",
+}
+
+export const SERIES = {
+  "css-pseudo-classes": {
+    title: "CSS Pseudo Classes",
+  },
 }

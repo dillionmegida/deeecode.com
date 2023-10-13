@@ -33,6 +33,8 @@ const CourseBlock = styled.li<{ linkClass }>`
     width: 100%;
 
     img {
+        height: 300px;
+        object-fit: cover;
       width: 100%;
     }
   }
@@ -49,7 +51,7 @@ const COURSES = [
   {
     label: "Regular Expressions Simplified",
     path: LINKS.regexCourse,
-    cover: "/regex-course-cover.png",
+    cover: "/large-regex-course-cover.png",
     linkClass: "--color-regex",
   },
   {

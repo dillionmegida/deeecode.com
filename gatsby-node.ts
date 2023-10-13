@@ -3,6 +3,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 const { LINKS } = require("./src/constants")
 
 const articlePageTemplate = path.resolve(`./src/templates/article-page.tsx`)
+const seriesPageTemplate = path.resolve(`./src/templates/series-page.tsx`)
 // const coursePageTemplate = path.resolve("./src/templates/course-page/index.tsx")
 
 /**
@@ -67,6 +68,25 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
 
+      allSeries: allMdx {
+        group(field: { frontmatter: { series: SELECT } }) {
+          fieldValue
+          nodes {
+            id
+            frontmatter {
+              title
+              date
+              description
+              cover
+              category
+              series
+            }
+          }
+        }
+      }
+
+      #   allSeries: allMdx()
+
       #   allCourses: allMdx(
       #     sort: { fields: { orderId: ASC } }
       #     filter: { fields: { slug: { regex: "//courses//" } } }
@@ -94,6 +114,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const articles = result.data.allArticles.nodes
+  const series = result.data.allSeries
   //   const courses = result.data.allCourses.nodes
 
   if (articles.length > 0) {
@@ -109,6 +130,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           id: article.id,
           previousArticleId,
           nextArticleId,
+        },
+      })
+    })
+  }
+
+  if (series.group.length > 0) {
+    series.group.forEach(item => {
+      const { fieldValue: seriesId } = item
+      console.log(seriesId)
+
+      createPage({
+        path: `/series/${seriesId}`,
+        component: `${seriesPageTemplate}`,
+        context: {
+          id: seriesId,
         },
       })
     })

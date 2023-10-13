@@ -5,6 +5,7 @@ import Twitter from "./Icon/Twitter"
 import TikTok from "./Icon/TikTok"
 import Instagram from "./Icon/Instagram"
 import styled from "styled-components"
+import BuyMeACoffee from "./Icon/Bmc"
 
 const LinkStyle = styled.a`
   transition: background 300ms, color 300ms;
@@ -28,7 +29,13 @@ const LinkStyle = styled.a`
   }
 `
 
-type Icon = "youtube" | "link" | "twitter" | "tiktok" | "instagram"
+type Icon =
+  | "youtube"
+  | "link"
+  | "twitter"
+  | "tiktok"
+  | "instagram"
+  | "buymeacoffee"
 
 type Props = {
   link: string
@@ -91,6 +98,7 @@ export default function AnchorLink({
     twitter: <Twitter size={iconSize} />,
     tiktok: <TikTok size={iconSize} />,
     instagram: <Instagram size={iconSize} />,
+    buymeacoffee: <BuyMeACoffee size={iconSize} />,
   }
 
   function getLinkIcon(link: string) {
@@ -117,6 +125,12 @@ export default function AnchorLink({
       link.startsWith("https://www.instagram")
     )
       return iconMap["instagram"]
+
+    if (
+      link.startsWith("https://buymeacoffee") ||
+      link.startsWith("https://www.buymeacoffee")
+    )
+      return iconMap["buymeacoffee"]
 
     return null
   }

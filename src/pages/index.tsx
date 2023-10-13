@@ -99,6 +99,17 @@ const IndexPage = ({ location }) => {
               iamdillion
             </AnchorLink>
           </div>
+          <div className="social-links">
+            <AnchorLink
+              iconSize={200}
+              className="yt-link"
+              newTab
+              link={LINKS.buymeacoffee}
+            >
+              {/* buymeacoffee */}
+            </AnchorLink>
+            
+          </div>
           <Bio>
             {/* <p>
               Simplifying the web, one video at a time. Videos on JavaScript,
