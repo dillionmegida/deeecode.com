@@ -76,6 +76,7 @@ const DEMOS = [
   {
     id: "VwqzqOX",
     title: "Fancy Navbar Animation",
+    video: "https://youtu.be/Vvdtpb1LA0s"
   },
   {
     id: "GRPpdod",
@@ -94,6 +95,7 @@ const DEMOS = [
   {
     id: "zYyEJwY",
     title: "3D Navbar Animation",
+    video: "https://youtu.be/3Xc3Qk4T-wE"
   },
   {
     id: "yLGORPJ",
@@ -111,6 +113,8 @@ const DEMOS = [
   { id: "gOZRvyM", title: "Image Slideshow", video: "" },
   { id: "XWoadoY", title: "Social Media Icons", video: "" },
   { id: "yLGobYa", title: "Scroll Progress Indicator", video: "" },
+  { id: "NWeVMwP", title: "Sticky Card Scroll Effect", video: "https://youtu.be/gv7d9KU36pM" },
+  { id: "rNooGVN", title: "Overflow Container Fade", video: "" },
 ]
 
 function CodepenEmbed() {
