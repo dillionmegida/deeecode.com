@@ -33,8 +33,8 @@ const CourseBlock = styled.li<{ linkClass }>`
     width: 100%;
 
     img {
-        height: 300px;
-        object-fit: cover;
+        /* height: 300px; */
+        /* object-fit: cover; */
       width: 100%;
     }
   }
