@@ -83,6 +83,11 @@ const IndexPage = ({ location }) => {
             </AnchorLink>
           </div>
           <div className="social-links">
+            <AnchorLink link={LINKS.discord} newTab>
+              Join my Discord
+            </AnchorLink>
+          </div>
+          <div className="social-links">
             <p>You can also find me on</p>
             <AnchorLink
               iconSize={15}
@@ -108,7 +113,6 @@ const IndexPage = ({ location }) => {
             >
               {/* buymeacoffee */}
             </AnchorLink>
-            
           </div>
           <Bio>
             {/* <p>

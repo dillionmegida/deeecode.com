@@ -27,6 +27,7 @@ export const LINKS = {
   tiktok: "https://tiktok.com/@iamdillion",
   instagram: "https://instagram.com/deeecode",
   buymeacoffee: "https://www.buymeacoffee.com/dillion",
+  discord: "https://discord.gg/AyQ4eE4J98"
 }
 
 export const SERIES = {

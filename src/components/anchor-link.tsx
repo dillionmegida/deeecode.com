@@ -6,6 +6,7 @@ import TikTok from "./Icon/TikTok"
 import Instagram from "./Icon/Instagram"
 import styled from "styled-components"
 import BuyMeACoffee from "./Icon/Bmc"
+import Discord from "./Icon/Discord"
 
 const LinkStyle = styled.a`
   transition: background 300ms, color 300ms;
@@ -36,6 +37,7 @@ type Icon =
   | "tiktok"
   | "instagram"
   | "buymeacoffee"
+  | "discord"
 
 type Props = {
   link: string
@@ -99,6 +101,7 @@ export default function AnchorLink({
     tiktok: <TikTok size={iconSize} />,
     instagram: <Instagram size={iconSize} />,
     buymeacoffee: <BuyMeACoffee size={iconSize} />,
+    discord: <Discord size={iconSize} />,
   }
 
   function getLinkIcon(link: string) {
@@ -131,6 +134,12 @@ export default function AnchorLink({
       link.startsWith("https://www.buymeacoffee")
     )
       return iconMap["buymeacoffee"]
+
+    if (
+      link.startsWith("https://discord") ||
+      link.startsWith("https://www.discord")
+    )
+      return iconMap["discord"]
 
     return null
   }
