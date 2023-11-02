@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react"
 import { LINKS } from "../constants"
-import AnchorLink from "../components/anchor-link"
 import styled from "styled-components"
+import Seo from "../components/seo"
 
 const Container = styled.div`
   width: 100%;
@@ -21,3 +21,7 @@ export default function Discord() {
     </Container>
   )
 }
+
+export const Head = () => (
+    <Seo imageCard="/discord-cover.png" title="Join my Discord Server!" />
+  )
