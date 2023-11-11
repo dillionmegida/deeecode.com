@@ -2,17 +2,32 @@ import React from "react"
 import styled from "styled-components"
 import Layout from "../../components/layout"
 import { Link } from "gatsby"
+import { NewTabLink } from "../../components/anchor-link"
 
 const Container = styled.div<{ type }>`
   font-size: 20px;
   color: white;
+  /* min-height: 100%; */
 
   .container {
     padding-top: 0;
   }
 
   a {
-    color: var(--color-${({ type }) => type});
+    color: var(--color-${({ type }) => type}-light);
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  b {
+    font-weight: bold;
+  }
+
+  h1 a {
+    text-decoration: underline;
   }
 `
 
@@ -22,6 +37,7 @@ const Cover = styled.div`
 
   img {
     width: 100%;
+    height: auto;
   }
 
   &.container-md {
@@ -45,7 +61,7 @@ const Bio = styled.div`
 `
 
 export default function CourseMainPage({ location, course }) {
-  const { cover, type, title, text } = course
+  const { cover, type, title, text, link } = course
 
   return (
     <Layout location={location} theme={type}>
@@ -54,7 +70,9 @@ export default function CourseMainPage({ location, course }) {
           <img src={cover} alt="Course cover" />
         </Cover>
         <div className="container-md">
-          <h1>{title}</h1>
+          <h1>
+            <NewTabLink link={link}>{title}</NewTabLink>
+          </h1>
           <Bio dangerouslySetInnerHTML={{ __html: text }}></Bio>
           {/* {courses.length > 0 && (
             <Outline>

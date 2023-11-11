@@ -14,6 +14,7 @@ const JavaScriptCoursePage = ({ location, data }) => {
         type: "javascript",
         title: "JavaScript Simplified for Beginners Course",
         cover: COURSE_COVER,
+        link: "#",
         text: `<p>
         Here's a course I'm working on--JavaScript for Beginners. In this
         course, I will teach you all you need to know about JavaScript

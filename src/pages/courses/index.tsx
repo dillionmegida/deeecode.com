@@ -31,10 +31,10 @@ const CourseBlock = styled.li<{ linkClass }>`
 
   .course-cover {
     width: 100%;
+    background-color: var(${({ linkClass }) => linkClass});
 
     img {
-        /* height: 300px; */
-        /* object-fit: cover; */
+      aspect-ratio: 1920/1080;
       width: 100%;
     }
   }
@@ -60,12 +60,18 @@ const COURSES = [
     cover: "/js-course-cover.png",
     linkClass: "--color-javascript",
   },
-//   {
-//     label: "Git Simplified for Beginners",
-//     path: LINKS.courses.git.path,
-//     cover: "/git/git-course-cover.png",
-//     linkClass: "--color-git",
-//   },
+  {
+    label: "React Simplified",
+    path: LINKS.reactCourse,
+    cover: "/react-course-cover.png",
+    linkClass: "--color-react",
+  },
+  //   {
+  //     label: "Git Simplified for Beginners",
+  //     path: LINKS.courses.git.path,
+  //     cover: "/git/git-course-cover.png",
+  //     linkClass: "--color-git",
+  //   },
 ]
 
 export default function Courses({ location }) {

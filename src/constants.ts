@@ -2,6 +2,8 @@ export const LINKS = {
   cssDemos: "/css-demos",
   courses: "/courses",
   regexCourse: "/courses/regex",
+  reactCourse: "/courses/react",
+  reactYouTubePlaylist: "https://youtube.com/playlist?list=PLLdz3KlabJv3U7Hdibr4S8VgM0-NQm-h2&si=pAyd9V8LFWbYqOR2",
   jsCourse: "/courses/javascript",
   // regex: {
   //   path: "/courses/regex",

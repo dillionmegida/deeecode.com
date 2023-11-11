@@ -14,6 +14,7 @@ const RegexCoursePage = ({ location, data }) => {
         cover: COURSE_COVER,
         type: "regex",
         title: "simpleregex.com",
+        link: "https://simpleregex.com",
         text: `<p>
         Here's my free course on Simplified Regular Expressions. In this
         course, I teach you how to interpret and understand regular

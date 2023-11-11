@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -9,8 +8,8 @@ import { LINKS } from "../constants"
 import HomeLanding from "../components/landing"
 
 const Container = styled.div`
-  .container {
-    max-width: 800px;
+  .container-md {
+    max-width: 1000px;
     margin: 0 auto;
   }
 
@@ -75,11 +74,14 @@ const IndexPage = ({ location }) => {
             >
               deeecode
             </AnchorLink>
-            <AnchorLink iconSize={25} link={LINKS.cssDemos}>
-              ✨ CSS Demos
+            <AnchorLink iconSize={25} link={LINKS.reactCourse}>
+              ❮❯ React Course
             </AnchorLink>
             <AnchorLink iconSize={25} link={LINKS.regexCourse}>
               🧑🏽‍💻 Regex Course
+            </AnchorLink>
+            <AnchorLink iconSize={25} link={LINKS.cssDemos}>
+              ✨ CSS Demos
             </AnchorLink>
           </div>
           <div className="social-links">
