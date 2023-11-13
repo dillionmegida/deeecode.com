@@ -64,6 +64,11 @@ const Container = styled.div<{ theme: any }>`
 
 const DEMOS = [
   {
+    id: "abXyZKw",
+    title: "Fade in with Intersection Observer API",
+    // video: "https://youtu.be/AERByfmKMok",
+  },
+  {
     id: "GRwaNVK",
     title: "Apple Dock Animation",
     video: "https://youtu.be/AERByfmKMok",
