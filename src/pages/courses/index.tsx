@@ -32,9 +32,12 @@ const CourseBlock = styled.li<{ linkClass }>`
   .course-cover {
     width: 100%;
     background-color: var(${({ linkClass }) => linkClass});
+    aspect-ratio: 1920 / 1080;
 
     img {
-      aspect-ratio: 1920/1080;
+      height: 100%;
+      /* height: 300px; */
+      /* object-fit: cover; */
       width: 100%;
     }
   }
@@ -53,6 +56,18 @@ const COURSES = [
     path: LINKS.regexCourse,
     cover: "/large-regex-course-cover.png",
     linkClass: "--color-regex",
+  },
+  {
+    label: "Simplified ReactJS",
+    path: LINKS.reactCourse,
+    cover: "/react-course-cover.png",
+    linkClass: "--color-react",
+  },
+  {
+    label: "Simplified Git",
+    path: LINKS.gitCourse,
+    cover: "/git-course-cover.png",
+    linkClass: "--color-git",
   },
   {
     label: "JavaScript Simplified for Beginners",

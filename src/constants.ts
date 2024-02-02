@@ -1,8 +1,10 @@
 export const LINKS = {
   cssDemos: "/css-demos",
   courses: "/courses",
-  regexCourse: "/courses/regex",
-  reactCourse: "/courses/react",
+  regexCourse: "https://simpleregex.com",
+  reactCourse: "https://simplereactjs.com",
+  gitCourse: "https://gitsimplified.com",
+  responsiveCSS: "https://responsivecss.dev",
   reactYouTubePlaylist: "https://youtube.com/playlist?list=PLLdz3KlabJv3U7Hdibr4S8VgM0-NQm-h2&si=pAyd9V8LFWbYqOR2",
   jsCourse: "/courses/javascript",
   // regex: {
@@ -20,7 +22,6 @@ export const LINKS = {
   //     "meta-characters": "/courses/regex/meta-characters",
   //   },
   // },
-  gitCourse: "/courses/git",
 
   articles: "/p",
 
@@ -29,7 +30,7 @@ export const LINKS = {
   tiktok: "https://tiktok.com/@iamdillion",
   instagram: "https://instagram.com/deeecode",
   buymeacoffee: "https://www.buymeacoffee.com/dillion",
-  discord: "https://discord.gg/AyQ4eE4J98"
+  discord: "https://discord.gg/AyQ4eE4J98",
 }
 
 export const SERIES = {

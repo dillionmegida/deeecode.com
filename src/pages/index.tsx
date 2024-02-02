@@ -74,11 +74,17 @@ const IndexPage = ({ location }) => {
             >
               deeecode
             </AnchorLink>
+            <AnchorLink iconSize={25} link={LINKS.regexCourse}>
+              🧑🏽‍💻 Regex Course
+            </AnchorLink>
+            <AnchorLink iconSize={25} link={LINKS.responsiveCSS}>
+              ✊🏽 Responsive CSS
+            </AnchorLink>
             <AnchorLink iconSize={25} link={LINKS.reactCourse}>
               ❮❯ React Course
             </AnchorLink>
-            <AnchorLink iconSize={25} link={LINKS.regexCourse}>
-              🧑🏽‍💻 Regex Course
+            <AnchorLink iconSize={25} link={LINKS.gitCourse}>
+              ⏳ Git Course
             </AnchorLink>
             <AnchorLink iconSize={25} link={LINKS.cssDemos}>
               ✨ CSS Demos

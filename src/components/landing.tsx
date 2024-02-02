@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 50px;
+  padding: 20px ;
   min-height: 50vh;
   position: relative;
   overflow: hidden;
@@ -48,7 +48,7 @@ const Container = styled.div`
   }
 
   h1 {
-    font-size: 60px;
+    font-size: clamp(2rem, 10vw, 5rem);
     font-weight: 800;
     font-family: Raleway;
     text-align: center;
@@ -63,29 +63,47 @@ const Container = styled.div`
         content: "✨";
         position: absolute;
         font-size: 20px;
-    }
-    
-    &::before {
+      }
+
+      &::before {
         left: 0px;
         top: -5px;
-    }
-    
-    &::after {
-          top: -10px;
+      }
+
+      &::after {
+        top: -10px;
         right: 0px;
       }
-    }
-
-    @media (max-width: 600px) {
-      font-size: 40px;
     }
   }
 
   .short-text {
     text-align: center;
-    max-width: 400px;
+    max-width: 500px;
+    font-size: clamp(1rem, 7vw, 1.8rem);
+    line-height: 1.3;
     width: 100%;
     margin: 20px auto 50px;
+
+    .highlight {
+      background-color: yellow;
+      color: var(--color-text);
+      border-radius: 2px;
+      font-weight: bold;
+      padding: 4px 8px;
+      /* background-color: / */
+    }
+  }
+
+  .arrow-down {
+    margin: 100px auto 0;
+    max-width: 40px;
+    /* position: absolute; */
+    left: 0;
+    position: relative;
+    top: 100px;
+    right: 0;
+    width: 100%;
   }
 
   .languages {
@@ -97,23 +115,6 @@ const Container = styled.div`
 
     img {
       width: 50px;
-      /* position: absolute; */
-      /* animation: random 20s infinite; */
-
-      /* @keyframes random {
-        from {
-          left: var(--left);
-          top: var(--top);
-          bottom: var(--bottom);
-          right: var(--right);
-        }
-        to {
-          left: calc(var(--left) + 100%);
-          top: calc(var(--top) + 100%);
-          bottom: calc(var(--bottom) + 100%);
-          right: calc(var(--right) + 100%);
-        }
-      } */
 
       &:nth-child(1) {
         --top: 50px;
@@ -165,14 +166,17 @@ export default function HomeLanding() {
           <span className="simplify-text">Simplify</span> the Web
         </h1>
         <p className="short-text">
-          My goal is to break down topics, languages and concepts related to the
-          web in the simplest way possible, through articles and videos 😄
+          {/* My goal is to break down topics, languages and concepts related to the
+          web in the simplest way possible, through articles and videos 😄 */}
+          I create <span className="highlight">simplified</span> resources on
+          web and software development 😄
         </p>
-        <div className="languages">
+        {/* <img src="/icons/arrow-down.svg" className="arrow-down" /> */}
+        {/* <div className="languages">
           {LANGUAGES.map(l => {
             return <img src={l.image} alt={l.name} />
           })}
-        </div>
+        </div> */}
         {/* <img src="/banner.png" alt="Deeecode cover" /> */}
       </div>
     </Container>

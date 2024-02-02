@@ -219,6 +219,11 @@ ol {
   list-style-image: none;
 }
 
+img {
+  width: 100%;
+  display: block;
+}
+
 strong {
   font-weight: 600;
 }
