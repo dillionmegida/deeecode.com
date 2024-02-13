@@ -75,18 +75,6 @@ const COURSES = [
     cover: "/js-course-cover.png",
     linkClass: "--color-javascript",
   },
-  {
-    label: "React Simplified",
-    path: LINKS.reactCourse,
-    cover: "/react-course-cover.png",
-    linkClass: "--color-react",
-  },
-  //   {
-  //     label: "Git Simplified for Beginners",
-  //     path: LINKS.courses.git.path,
-  //     cover: "/git/git-course-cover.png",
-  //     linkClass: "--color-git",
-  //   },
 ]
 
 export default function Courses({ location }) {
