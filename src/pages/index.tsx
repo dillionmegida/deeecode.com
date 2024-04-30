@@ -86,6 +86,9 @@ const IndexPage = ({ location }) => {
             <AnchorLink iconSize={25} link={LINKS.gitCourse}>
               ⏳ Git Course
             </AnchorLink>
+            <AnchorLink iconSize={25} link={LINKS.tsWebsite}>
+              🤙🏽 Simple TypeScript
+            </AnchorLink>
             <AnchorLink iconSize={25} link={LINKS.cssDemos}>
               ✨ CSS Demos
             </AnchorLink>

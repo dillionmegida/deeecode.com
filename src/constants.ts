@@ -7,6 +7,7 @@ export const LINKS = {
   responsiveCSS: "https://responsivecss.dev",
   reactYouTubePlaylist: "https://youtube.com/playlist?list=PLLdz3KlabJv3U7Hdibr4S8VgM0-NQm-h2&si=pAyd9V8LFWbYqOR2",
   jsCourse: "/courses/javascript",
+  tsWebsite: "https://simpletypescript.dev/",
   // regex: {
   //   path: "/courses/regex",
   //   sub: {
